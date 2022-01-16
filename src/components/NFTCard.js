@@ -23,7 +23,7 @@ export default function NFTCard({
   multiAble,
   multiStakeAble,
   multiUnstakeAble,
-  checked,
+  cardId,
   ...props
 }) {
   const [days, setDays] = useState(0)
@@ -46,6 +46,7 @@ export default function NFTCard({
   const [realName, setRealName] = useState("")
   const [indiContract, setIndiContract] = useState([])
   const [unloading, setUnloading] = useState(false)
+  const [checked, setChecked] = useState(false)
 
   const alertBox = (err) => {
     setUnloading(false)
@@ -72,6 +73,8 @@ export default function NFTCard({
     setTokenId(data.token_id)
     setHash(data.token_uri)
 
+    setChecked(data.checked)
+
     let urdd = data.token_uri.split("://")
     let uri = ''
     let ipfsIssue = 0
@@ -90,20 +93,24 @@ export default function NFTCard({
         uri = data.token_uri
       }
     }
+    console.log(uri, "card uri")
     if (uri !== undefined) {
       await fetch(uri)
         .then(resp =>
           resp.json()
         ).then((json) => {
+          console.log(json.image, "card json.image")
           let img = json.image
-          const imgString = img.split("://")
-          if (imgString[0] === "ipfs") {
-            img = "https://ipfs.io/ipfs/" + imgString[imgString.length - 1]
-          } else {
-            img = json.image
+          if (img !== undefined) {
+            const imgString = img.split("://")
+            if (imgString[0] === "ipfs") {
+              img = "https://ipfs.io/ipfs/" + imgString[imgString.length - 1]
+            } else {
+              img = json.image
+            }
+            setImage(img)
+            setDescription(json.description)
           }
-          setImage(img)
-          setDescription(json.description)
         })
     }
 
@@ -207,12 +214,12 @@ export default function NFTCard({
     <>
       {(filterState === action || filterState === 2) &&
         <div className={action !== 1 ? "nft-card" : "nft-card nft-card-active"}>
-          <div className="card-checkbox">
-            <button >
+          <div className="card-checkbox" onClick={() => setChecked(!checked)} style={{ border: checked ? "2px solid #ccc" : "2px solid transparent" }}>
+            <button>
               {checked ?
                 <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M7 9L10 12L20 2" stroke="#DFAE00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                  <path d="M19 10V17C19 17.5304 18.7893 18.0391 18.4142 18.4142C18.0391 18.7893 17.5304 19 17 19H3C2.46957 19 1.96086 18.7893 1.58579 18.4142C1.21071 18.0391 1 17.5304 1 17V3C1 2.46957 1.21071 1.96086 1.58579 1.58579C1.96086 1.21071 2.46957 1 3 1H14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M7 9L10 12L20 2" stroke="#DFAE00" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M19 10V17C19 17.5304 18.7893 18.0391 18.4142 18.4142C18.0391 18.7893 17.5304 19 17 19H3C2.46957 19 1.96086 18.7893 1.58579 18.4142C1.21071 18.0391 1 17.5304 1 17V3C1 2.46957 1.21071 1.96086 1.58579 1.58579C1.96086 1.21071 2.46957 1 3 1H14" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
                 :
                 <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">

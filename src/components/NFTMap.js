@@ -89,6 +89,7 @@ export default function NFTMap({
         {stakedList.length !== 0 && stakedList.reverse().map((item, key) => (
           <NFTCard
             key={key}
+            cardId={key}
             data={item}
             state={0}
             filterState={filterState}
@@ -106,7 +107,8 @@ export default function NFTMap({
         ))}
         {unstakedList.length !== 0 && unstakedList.reverse().map((item, key) => (
           <NFTCard
-            key={key}
+            cardId={key}
+            key={staked + key}
             data={item}
             state={0}
             filterState={filterState}
