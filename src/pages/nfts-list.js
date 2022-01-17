@@ -106,7 +106,6 @@ export default function NFTLIST({
             reward: nftData.reward.toString(),
             percent: nftData.percent.toString(),
             timestamp: nftData.timestamp.toString(),
-            checked: false
           })
         }
       }
@@ -134,7 +133,6 @@ export default function NFTLIST({
           timestamp: "0",
           percent: 0,
           token_uri: userNFTs.result[i].token_uri,
-          checked: false
         })
       }
       closeLoading()

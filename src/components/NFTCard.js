@@ -17,13 +17,13 @@ export default function NFTCard({
   signer,
   address,
   reRender,
-  useForceUpdate,
-  forceRender,
   setForce,
   multiAble,
   multiStakeAble,
   multiUnstakeAble,
   cardId,
+  setCheckedCardByHash,
+  checkAble,
   ...props
 }) {
   const [days, setDays] = useState(0)
@@ -46,7 +46,6 @@ export default function NFTCard({
   const [realName, setRealName] = useState("")
   const [indiContract, setIndiContract] = useState([])
   const [unloading, setUnloading] = useState(false)
-  const [checked, setChecked] = useState(false)
 
   const alertBox = (err) => {
     setUnloading(false)
@@ -73,8 +72,6 @@ export default function NFTCard({
     setTokenId(data.token_id)
     setHash(data.token_uri)
 
-    setChecked(data.checked)
-
     let urdd = data.token_uri.split("://")
     let uri = ''
     let ipfsIssue = 0
@@ -93,13 +90,11 @@ export default function NFTCard({
         uri = data.token_uri
       }
     }
-    console.log(uri, "card uri")
     if (uri !== undefined) {
       await fetch(uri)
         .then(resp =>
           resp.json()
         ).then((json) => {
-          console.log(json.image, "card json.image")
           let img = json.image
           if (img !== undefined) {
             const imgString = img.split("://")
@@ -210,24 +205,28 @@ export default function NFTCard({
     }
     // eslint-disable-next-line
   }, [])
+
   return (
     <>
       {(filterState === action || filterState === 2) &&
-        <div className={action !== 1 ? "nft-card" : "nft-card nft-card-active"}>
-          <div className="card-checkbox" onClick={() => setChecked(!checked)} style={{ border: checked ? "2px solid #ccc" : "2px solid transparent" }}>
-            <button>
-              {checked ?
-                <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M7 9L10 12L20 2" stroke="#DFAE00" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M19 10V17C19 17.5304 18.7893 18.0391 18.4142 18.4142C18.0391 18.7893 17.5304 19 17 19H3C2.46957 19 1.96086 18.7893 1.58579 18.4142C1.21071 18.0391 1 17.5304 1 17V3C1 2.46957 1.21071 1.96086 1.58579 1.58579C1.96086 1.21071 2.46957 1 3 1H14" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                :
-                <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3.75 0C2.95435 0 2.19129 0.316071 1.62868 0.87868C1.06607 1.44129 0.75 2.20435 0.75 3V17C0.75 17.7956 1.06607 18.5587 1.62868 19.1213C2.19129 19.6839 2.95435 20 3.75 20H17.75C18.5456 20 19.3087 19.6839 19.8713 19.1213C20.4339 18.5587 20.75 17.7956 20.75 17V3C20.75 2.20435 20.4339 1.44129 19.8713 0.87868C19.3087 0.316071 18.5456 0 17.75 0H3.75ZM3.75 2H17.75C18.0152 2 18.2696 2.10536 18.4571 2.29289C18.6446 2.48043 18.75 2.73478 18.75 3V17C18.75 17.2652 18.6446 17.5196 18.4571 17.7071C18.2696 17.8946 18.0152 18 17.75 18H3.75C3.48478 18 3.23043 17.8946 3.04289 17.7071C2.85536 17.5196 2.75 17.2652 2.75 17V3C2.75 2.73478 2.85536 2.48043 3.04289 2.29289C3.23043 2.10536 3.48478 2 3.75 2V2Z" fill="white" />
-                </svg>
-              }
-            </button>
-          </div>
+        <div className={action !== 1 ? "nft-card" : "nft-card nft-card-active"} onClick={() => setCheckedCardByHash(tokenAddress, tokenId, name, hash, image)}>
+          {/* <div className="card-checkbox"> */}
+          {checkAble &&
+            <div className="card-checkbox" style={{ border: data.checked ? "2px solid #ccc" : "2px solid transparent" }}>
+              <button>
+                {data.checked ?
+                  <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 9L10 12L20 2" stroke="#DFAE00" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M19 10V17C19 17.5304 18.7893 18.0391 18.4142 18.4142C18.0391 18.7893 17.5304 19 17 19H3C2.46957 19 1.96086 18.7893 1.58579 18.4142C1.21071 18.0391 1 17.5304 1 17V3C1 2.46957 1.21071 1.96086 1.58579 1.58579C1.96086 1.21071 2.46957 1 3 1H14" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  :
+                  <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3.75 0C2.95435 0 2.19129 0.316071 1.62868 0.87868C1.06607 1.44129 0.75 2.20435 0.75 3V17C0.75 17.7956 1.06607 18.5587 1.62868 19.1213C2.19129 19.6839 2.95435 20 3.75 20H17.75C18.5456 20 19.3087 19.6839 19.8713 19.1213C20.4339 18.5587 20.75 17.7956 20.75 17V3C20.75 2.20435 20.4339 1.44129 19.8713 0.87868C19.3087 0.316071 18.5456 0 17.75 0H3.75ZM3.75 2H17.75C18.0152 2 18.2696 2.10536 18.4571 2.29289C18.6446 2.48043 18.75 2.73478 18.75 3V17C18.75 17.2652 18.6446 17.5196 18.4571 17.7071C18.2696 17.8946 18.0152 18 17.75 18H3.75C3.48478 18 3.23043 17.8946 3.04289 17.7071C2.85536 17.5196 2.75 17.2652 2.75 17V3C2.75 2.73478 2.85536 2.48043 3.04289 2.29289C3.23043 2.10536 3.48478 2 3.75 2V2Z" fill="white" />
+                  </svg>
+                }
+              </button>
+            </div>
+          }
           {image === "" ?
             <Skeleton sx={{ bgcolor: '#ffffff20' }} style={{ width: "100%", height: "240px", borderRadius: 6, backgroundColor: "ffffff3d" }} variant="retangle" />
             :
@@ -274,22 +273,24 @@ export default function NFTCard({
               }
             </>
           }
-          <div className="card-action">
-            {action !== 1 && !multiStakeAble &&
-              <DoActionButton onClick={() => setOpen(true)}>
-                Stake
-              </DoActionButton>
-            }
-            {action === 1 && !multiUnstakeAble &&
-              <UnstakeButton onClick={() => openUnstake()} disabled={unloading}>
-                {unloading ?
-                  <ClipLoader loading={unloading} size={12} color="#fff" />
-                  :
-                  "Unstake"
-                }
-              </UnstakeButton>
-            }
-          </div>
+          {!checkAble &&
+            <div className="card-action">
+              {action !== 1 && !multiStakeAble &&
+                <DoActionButton onClick={() => setOpen(true)}>
+                  Stake
+                </DoActionButton>
+              }
+              {action === 1 && !multiUnstakeAble &&
+                <UnstakeButton onClick={() => openUnstake()} disabled={unloading}>
+                  {unloading ?
+                    <ClipLoader loading={unloading} size={12} color="#fff" />
+                    :
+                    "Unstake"
+                  }
+                </UnstakeButton>
+              }
+            </div>
+          }
           {action === 1 &&
             <div style={{ display: "none" }}>
               <Countdown date={new Date(parseInt(stakedTime) * 1000 + 365 * 24 * 3600 * 1000 + 7000)} onTick={(e) => handleTime(e)} onComplete={() => autoClaim()} />
@@ -307,7 +308,6 @@ export default function NFTCard({
             balance={balance}
             address={address}
             alertBox={(e) => alertBox(e)}
-            useForceUpdate={useForceUpdate}
             open={open}
             reRender={reRender}
             close={() => setOpen(false)}

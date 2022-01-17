@@ -22,7 +22,6 @@ export default function CardModal({
   hash,
   realName,
   reRender,
-  useForceUpdate,
   ...props }) {
   const [agree, setAgree] = useState(false)
   const [amount, setAmount] = useState(1)
