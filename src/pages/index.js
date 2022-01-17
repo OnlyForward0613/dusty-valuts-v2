@@ -33,8 +33,8 @@ export default function Home({ headerAlert, closeAlert }) {
   const [earlyRemoved, setEarlyRemoved] = useState(0)
   const [dbalance, setdBalance] = useState(0)
   const [holders, setHolders] = useState(0)
+  const [ownerDusty, setTotalOwnerDusty] = useState(0)
   const [homeLoading, setHomeloading] = useState(false)
-  const [ownerDusty, setTotalOwnerDusty] = useState(false)
 
   const connectWallet = async () => {
     if (await checkNetwork()) {
@@ -54,36 +54,38 @@ export default function Home({ headerAlert, closeAlert }) {
       setConnected(true)
       setSignerAddress(address)
 
-      contract = new ethers.Contract(
+      const contract = new ethers.Contract(
         SMARTCONTRACT_ADDRESS,
         SMARTCONTRACT_ABI,
         signer
       )
-      contract_20 = new ethers.Contract(
-        SMARTCONTRACT_ADDRESS_ERC20,
-        SMARTCONTRACT_ABI_ERC20,
-        signer
-      )
-      const bal = await contract_20.balanceOf(address)
-      setSignerBalance(ethers.utils.formatEther(bal))
 
-      const totalS = await contract_20.totalSupply()
-      setTotalSupply(ethers.utils.formatEther(totalS))
+      console.log(contract, "contraccttt")
+      // contract_20 = new ethers.Contract(
+      //   SMARTCONTRACT_ADDRESS_ERC20,
+      //   SMARTCONTRACT_ABI_ERC20,
+      //   signer
+      // )
+      // const bal = await contract_20.balanceOf(address)
+      // setSignerBalance(ethers.utils.formatEther(bal))
 
-      const totlass = await contract_20.holders()
-      setHolders(totlass.toString())
+      // const totalS = await contract_20.totalSupply()
+      // setTotalSupply(ethers.utils.formatEther(totalS))
 
-      const early = await contract.earlyRemoved()
-      setEarlyRemoved(early.toString())
+      // const totlass = await contract_20.holders()
+      // setHolders(totlass.toString())
 
-      const totalN = await contract_20.balanceOf(SMARTCONTRACT_ADDRESS)
-      setTotalDusty(totalN.toString())
+      // const early = await contract.earlyRemoved()
+      // setEarlyRemoved(early.toString())
 
-      const Obal = await contract.bonusPool()
-      setTotalOwnerDusty(parseFloat(Obal.toString()) + parseFloat(1114))
+      // const totalN = await contract_20.balanceOf(SMARTCONTRACT_ADDRESS)
+      // setTotalDusty(totalN.toString())
 
-      const sta = await contract.totalStaked()
-      setStaked(sta.toString())
+      // const Obal = await contract.bonusPool()
+      // setTotalOwnerDusty(parseFloat(Obal.toString()) + parseFloat(1114))
+
+      // const sta = await contract.totalStaked()
+      // setStaked(sta.toString())
 
       setHomeloading(false) //loading off
 
@@ -104,7 +106,7 @@ export default function Home({ headerAlert, closeAlert }) {
     const connection = await web3Modal.connect()
     const provider = new ethers.providers.Web3Provider(connection)
     const signer = provider.getSigner()
-    contract = new ethers.Contract(
+    const contract = new ethers.Contract(
       SMARTCONTRACT_ADDRESS,
       SMARTCONTRACT_ABI,
       signer
@@ -138,7 +140,7 @@ export default function Home({ headerAlert, closeAlert }) {
   }
   const getNFTLIST = () => {
     setPastNFTs()
-    setStakedNFTs()
+    // setStakedNFTs()
   }
 
   useEffect(() => {

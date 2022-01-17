@@ -119,7 +119,8 @@ export default function NFTLIST({
     unStakedNfts = []
     const web3 = new Web3(Web3.givenProvider)
     const accounts = await web3.eth.getAccounts()
-    const userNFTs = await Moralis.Web3API.account.getNFTs({ chain: 'bsc', address: accounts[0] })
+    const userNFTs = await Moralis.Web3API.account.getNFTs({ address: accounts[0] })
+    console.log(userNFTs)
     if (userNFTs.total !== 0) {
       startLoading()
       for (var i = 0; i < userNFTs.result.length; i++) {
@@ -145,7 +146,7 @@ export default function NFTLIST({
   const getNFTLIST = () => {
     startLoading()
     setPastNFTs()
-    setStakedNFTs()
+    // setStakedNFTs()
   }
 
   useEffect(() => {

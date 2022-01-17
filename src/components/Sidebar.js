@@ -15,7 +15,7 @@ export default function Sidebar({ connected, headerAlert, ...props }) {
   const [loading, setLoading] = useState(false)
 
   const getPrice = async () => {
-    await fetch('https://api.pancakeswap.info/api/v2/tokens/' + SMARTCONTRACT_ADDRESS_ERC20)
+    await fetch('https://api.pancakeswap.info/api/v2/tokens/' + '0xc6f82B6922Ad6484c69BBE5f0c52751cE7F15EF2')
       .then(response => response.json())
       .then((data) => {
         setPrice(data.data.price)
