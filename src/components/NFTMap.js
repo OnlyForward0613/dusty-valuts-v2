@@ -46,43 +46,46 @@ export default function NFTMap({
       setRenderArray(data)
     } else {
       nftData = []
-      for (let i = 0; i < stakedList.length; i++) {
-        // setRenderArray()
-        const item = {
-          name: unstakedList[i].name,
-          token_address: unstakedList[i].token_address,
-          token_id: unstakedList[i].token_id,
-          token_uri: unstakedList[i].token_uri,
-          reward: unstakedList[i].reward,
-          action: unstakedList[i].action,
-          image: unstakedList[i].image,
-          description: unstakedList[i].description,
-          reward: unstakedList[i].reward,
-          percent: unstakedList[i].percent,
-          timestamp: unstakedList[i].timestamp,
-          checked: false
+      if (stakedList.length !== 0) {
+        for (let i = 0; i < stakedList.length; i++) {
+          const item = {
+            name: stakedList[i].name,
+            token_address: stakedList[i].token_address,
+            token_id: stakedList[i].token_id,
+            token_uri: stakedList[i].token_uri,
+            reward: stakedList[i].reward,
+            action: stakedList[i].action,
+            image: stakedList[i].image,
+            description: stakedList[i].description,
+            reward: stakedList[i].reward,
+            percent: stakedList[i].percent,
+            timestamp: stakedList[i].timestamp,
+            checked: false
+          }
+          nftData.push(item)
         }
-        nftData.push(item)
       }
 
-      for (let j = 0; j < unstakedList.length; j++) {
-        const item = {
-          name: unstakedList[j].name,
-          token_address: unstakedList[j].token_address,
-          token_id: unstakedList[j].token_id,
-          token_uri: unstakedList[j].token_uri,
-          reward: unstakedList[j].reward,
-          action: unstakedList[j].action,
-          image: unstakedList[j].image,
-          description: unstakedList[j].description,
-          reward: unstakedList[j].reward,
-          percent: unstakedList[j].percent,
-          timestamp: unstakedList[j].timestamp,
-          checked: false
+      if (unstakedList.length !== 0) {
+        for (let j = 0; j < unstakedList.length; j++) {
+          const item = {
+            name: unstakedList[j].name,
+            token_address: unstakedList[j].token_address,
+            token_id: unstakedList[j].token_id,
+            token_uri: unstakedList[j].token_uri,
+            reward: unstakedList[j].reward,
+            action: unstakedList[j].action,
+            image: unstakedList[j].image,
+            description: unstakedList[j].description,
+            reward: unstakedList[j].reward,
+            percent: unstakedList[j].percent,
+            timestamp: unstakedList[j].timestamp,
+            checked: false
+          }
+          nftData.push(item)
         }
-        nftData.push(item)
+        setRenderArray(nftData)
       }
-      setRenderArray(nftData)
     }
   }
   // set checked card state by id
@@ -90,8 +93,9 @@ export default function NFTMap({
     let data = renderArray
     const index = data.map(function (e) { return e.token_uri }).indexOf(hash)
     data[index].checked = !data[index].checked
-    setHide(!hide)
     renderNFTs(data)
+    setCount()
+    setHide(!hide) //for re-render
   }
 
   const setMultiAbleState = (state) => {
@@ -105,13 +109,33 @@ export default function NFTMap({
   }
 
   const selectAll = () => {
-
+    let data = renderArray
+    data.map((e) => e.checked = true)
+    setRenderArray(data)
+    setSelectCount(data.length)
   }
 
   const deselectAll = () => {
-
+    let data = renderArray
+    data.map((e) => e.checked = false)
+    setRenderArray(data)
+    setSelectCount(0)
   }
 
+  const setCount = () => {
+    let cnt = 0
+    renderArray.map((item) =>
+      item.checked && cnt++
+    )
+    setSelectCount(cnt)
+    setHide(!hide)
+  }
+
+  const calcelMulti = () => {
+    setCheckAble(false)
+    setMultiStakeAble(false)
+    setMultiUnstakeAble(false)
+  }
   useEffect(() => {
     setAll(unstakedList.length + stakedList.length)
     setUnstaked(unstakedList.length)
@@ -157,13 +181,16 @@ export default function NFTMap({
         <div className="multi-infobox">
           <p><span>{selectCount}</span>Selected</p>
           <div className="infobox-button">
-            <DoActionButton>Select All</DoActionButton>
+            <DoActionButton onClick={() => selectAll()}>Select All</DoActionButton>
+          </div>
+          <div className="infobox-button">
+            <DoActionButton onClick={() => deselectAll()}>Deselect All</DoActionButton>
           </div>
           <div className="infobox-button">
             <DoActionButton>stake</DoActionButton>
           </div>
           <div className="infobox-button">
-            <CancelButton onClick={() => setMultiStakeAble(false)}>cancel</CancelButton>
+            <CancelButton onClick={() => calcelMulti()}>cancel</CancelButton>
           </div>
         </div>
       }
