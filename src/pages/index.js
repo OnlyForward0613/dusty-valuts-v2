@@ -35,6 +35,7 @@ export default function Home({ headerAlert, closeAlert }) {
   const [holders, setHolders] = useState(0)
   const [ownerDusty, setTotalOwnerDusty] = useState(0)
   const [homeLoading, setHomeloading] = useState(false)
+  const [totalNFTs, setTotalNFTs] = useState(0)
 
   const connectWallet = async () => {
     if (await checkNetwork()) {
@@ -44,7 +45,7 @@ export default function Home({ headerAlert, closeAlert }) {
         providerOptions, // required
       })
       setHomeloading(true) //loading start
-
+      setLoading(true)
       const provider = await web3Modal.connect()
       const web3Provider = new providers.Web3Provider(provider)
 
@@ -60,7 +61,7 @@ export default function Home({ headerAlert, closeAlert }) {
         signer
       )
 
-      contract_20 = new ethers.Contract(
+      const contract_20 = new ethers.Contract(
         SMARTCONTRACT_ADDRESS_ERC20,
         SMARTCONTRACT_ABI_ERC20,
         signer
@@ -100,46 +101,48 @@ export default function Home({ headerAlert, closeAlert }) {
     }
   }
 
-  const setStakedNFTs = async () => {
-    const web3Modal = new Web3Modal()
-    const connection = await web3Modal.connect()
-    const provider = new ethers.providers.Web3Provider(connection)
-    const signer = provider.getSigner()
+  const setPastNFTs = async () => {
+    setLoading(true)
+    const web3 = new Web3(Web3.givenProvider)
+    const accounts = await web3.eth.getAccounts()
+    const web3Modal = new Web3Modal({
+      network: 'mainnet', // optional
+      cacheProvider: true,
+      providerOptions, // required
+    })
+    const provider = await web3Modal.connect()
+    const web3Provider = new providers.Web3Provider(provider)
+    const signer = web3Provider.getSigner()
     const contract = new ethers.Contract(
       SMARTCONTRACT_ADDRESS,
       SMARTCONTRACT_ABI,
       signer
     )
-    const web3 = new Web3(Web3.givenProvider)
-    const accounts = await web3.eth.getAccounts()
-    const total = await contract.staked(accounts[0])
-    if (parseInt(total.toString()) !== 0) {
-      let dd = 0
-      let mmm = 0
-      for (var i = 0; i < total; i++) {
-        const nftData = await contract.activities(accounts[0], i)
-        if (nftData.action === 1) {
-          dd++
-          mmm = mmm + parseFloat(ethers.utils.formatEther(nftData.reward.toString()))
-        }
-      }
-      setStakedCnt(dd)
-      setTotalReward(mmm)
-    }
-    setLoading(false)
-  }
+    let Nfts = []
+    let sCnt = 0
+    let usCnt = 0
+    let rewords = 0
+    const userNFTs = await Moralis.Web3API.account.getNFTs({ chain: 'bsc testnet', address: accounts[0] })
 
-  const setPastNFTs = async () => {
-    setLoading(true)
-    const web3 = new Web3(Web3.givenProvider)
-    const accounts = await web3.eth.getAccounts()
-    const userNFTs = await Moralis.Web3API.account.getNFTs({ chain: 'bsc', address: accounts[0] })
-    setUnstakedCnt(userNFTs.total)
+    for (var i = 0; i < userNFTs.result.length; i++) {
+      if (userNFTs.result[i].name !== "MoM") {
+        const nftDump = await contract.status(accounts[0], userNFTs.result[i].token_address, userNFTs.result[i].token_id)
+        Nfts.push({
+          action: nftDump.action,
+          token_address: userNFTs.result[i].token_address,
+          token_id: userNFTs.result[i].token_id,
+          reward: nftDump.reward,
+          timestamp: nftDump.stakedTime.toString(),
+        })
+        nftDump.action === 1 ? usCnt++ : sCnt++
+        rewords = rewords + parseFloat(ethers.utils.formatEther(nftDump.reward))
+      }
+    }
+    setTotalNFTs(Nfts.length)
+    setStakedCnt(sCnt)
+    setUnstakedCnt(usCnt)
+    setTotalReward(rewords)
     setLoading(false)
-  }
-  const getNFTLIST = () => {
-    setPastNFTs()
-    // setStakedNFTs()
   }
 
   useEffect(() => {
@@ -148,7 +151,7 @@ export default function Home({ headerAlert, closeAlert }) {
         if (await checkNetwork("no-alert")) {
           // setLoading(true)
           await connectWallet()
-          getNFTLIST()
+          setPastNFTs()
           ethereum.on('accountsChanged', function (accounts) {
             window.location.reload()
           })
@@ -207,9 +210,10 @@ export default function Home({ headerAlert, closeAlert }) {
             ownerDusty={ownerDusty}
             holders={holders}
             stakedCnt={stakedCnt}
+            unstakedCnt={unstakedCnt}
+            totalNFTs={totalNFTs}
             totalReward={totalReward}
             loading={loading}
-            unstakedCnt={unstakedCnt}
           />
         </div>
       </MainContent>

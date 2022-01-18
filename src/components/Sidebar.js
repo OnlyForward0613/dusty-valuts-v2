@@ -1,10 +1,9 @@
 import { Skeleton } from "@mui/material"
 import { useRouter } from "next/router"
 import { useState, useEffect } from 'react'
-import { PANCAKE_LINK, SMARTCONTRACT_ADDRESS_ERC20 } from "../../config"
+import { PANCAKE_LINK } from "../../config"
 import { importToken } from "../hook/ethereum"
 import { SidebarButton } from "./styleHook"
-import { successAlert } from "./toastGroup"
 import Moralis from "moralis"
 
 export default function Sidebar({ connected, headerAlert, ...props }) {
@@ -30,6 +29,7 @@ export default function Sidebar({ connected, headerAlert, ...props }) {
     return () => {
       clearInterval(interval_id)
     }
+    // eslint-disable-next-line
   }, [])
 
   return (

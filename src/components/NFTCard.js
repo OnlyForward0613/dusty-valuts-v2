@@ -29,7 +29,6 @@ export default function NFTCard({
   ...props
 }) {
   const [days, setDays] = useState(0)
-  const [cid, setCid] = useState(-1)
   const [hours, setHours] = useState(0)
   const [minute, setMinute] = useState(0)
   const [second, setSecond] = useState(0)
@@ -62,7 +61,6 @@ export default function NFTCard({
   }
 
   const setDetail = async (data) => {
-    setCid(data.cid)
     setAction(data.action)
     setReward(data.reward)
     setPercent(data.percent)
@@ -143,7 +141,7 @@ export default function NFTCard({
       signer
     )
     try {
-      const res = await contract.autoClaim(address, cid)
+      const res = await contract.autoClaim(tokenAddress, tokenId) //danger part
       await res.wait()
       successAlert("You won! You received the Reward!", true)
     } catch (err) {

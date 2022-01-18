@@ -92,7 +92,6 @@ export default function NFTLIST({
         if (userNFTs.result[i].name !== "MoM") {
           const nftDump = await contract.status(accounts[0], userNFTs.result[i].token_address, userNFTs.result[i].token_id)
           stakedNfts.push({
-            cid: -1,
             name: userNFTs.result[i].name,
             action: nftDump.action,
             token_address: userNFTs.result[i].token_address,
