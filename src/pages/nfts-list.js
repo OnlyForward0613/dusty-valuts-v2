@@ -25,7 +25,6 @@ export default function NFTLIST({
   let stakedNfts = []
   const [filterState, setFilterState] = useState(2)
   const [stakedList, setStakedList] = useState([])
-  const [unStakedList, setUnstakedList] = useState([])
   const [checkAble, setCheckAble] = useState(false)
   const [connected, setConnected] = useState(false)
   const [signerAddress, setSignerAddress] = useState("")
@@ -92,7 +91,6 @@ export default function NFTLIST({
       for (var i = 0; i < userNFTs.result.length; i++) {
         if (userNFTs.result[i].name !== "MoM") {
           const nftDump = await contract.status(accounts[0], userNFTs.result[i].token_address, userNFTs.result[i].token_id)
-          console.log(nftDump.action, nftDump.stakedTime.toString())
           stakedNfts.push({
             cid: -1,
             name: userNFTs.result[i].name,
@@ -107,7 +105,7 @@ export default function NFTLIST({
         }
       }
       closeLoading()
-      setUnstakedList(stakedNfts)
+      setStakedList(stakedNfts)
     } else {
       closeLoading()
     }
@@ -181,7 +179,6 @@ export default function NFTLIST({
             setCheckAble={(e) => setCheckAble(e)}
             getNFTLIST={() => getNFTLIST()}
             stakedList={stakedList}
-            unStakedList={unStakedList}
             startLoading={startLoading}
             closeLoading={closeLoading}
             headerAlert={headerAlert}

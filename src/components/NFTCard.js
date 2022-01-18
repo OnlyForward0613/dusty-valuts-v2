@@ -214,7 +214,7 @@ export default function NFTCard({
       {(filterState === action || filterState === 2) &&
         <div className={action !== 1 ? "nft-card" : "nft-card nft-card-active"}>
           {checkAble &&
-            <div className="card-checkbox" style={{ border: data.checked ? "2px solid #ccc" : "2px solid transparent" }} onClick={() => setCheckedCardByHash(tokenAddress, tokenId, name, hash, image)}>
+            <div className="card-checkbox" style={{ border: data.checked ? "2px solid #ccc" : "2px solid transparent" }} onClick={() => setCheckedCardByHash(hash, image)}>
               <button>
                 {data.checked ?
                   <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -20,7 +20,6 @@ export default function NFTMap({
   checkAble,
   setCheckAble,
   getNFTLIST,
-  unStakedList,
   stakedList,
   balance,
   startLoading,
@@ -29,7 +28,6 @@ export default function NFTMap({
   ...props
 }) {
   const [pageRerender, setPageRerender] = useState("")
-  const [all, setAll] = useState(0)
   const [unstaked, setUnstaked] = useState(0)
   const [staked, setStaked] = useState(0)
   const [more, setMore] = useState(false)
@@ -50,6 +48,8 @@ export default function NFTMap({
     } else {
       nftData = []
       if (stakedList.length !== 0) {
+        let stakedCount = 0
+        let unStakedCount = 0
         for (let i = 0; i < stakedList.length; i++) {
           const item = {
             name: stakedList[i].name,
@@ -66,33 +66,17 @@ export default function NFTMap({
             checked: false
           }
           nftData.push(item)
+          if (stakedList[i].action === 0) unStakedCount++
+          else stakedCount++
         }
-      }
-
-      if (unStakedList.length !== 0) {
-        for (let j = 0; j < unStakedList.length; j++) {
-          const item = {
-            name: unStakedList[j].name,
-            token_address: unStakedList[j].token_address,
-            token_id: unStakedList[j].token_id,
-            token_uri: unStakedList[j].token_uri,
-            reward: unStakedList[j].reward,
-            action: unStakedList[j].action,
-            image: unStakedList[j].image,
-            description: unStakedList[j].description,
-            reward: unStakedList[j].reward,
-            percent: unStakedList[j].percent,
-            timestamp: unStakedList[j].timestamp,
-            checked: false
-          }
-          nftData.push(item)
-        }
+        setStaked(stakedCount)
+        setUnstaked(unStakedCount)
         setRenderArray(nftData)
       }
     }
   }
   // set checked card state by id
-  const setCheckedCardByHash = (tokenAddress, tokenId, name, hash, image) => {
+  const setCheckedCardByHash = (hash, image) => {
     let data = renderArray
     const index = data.map(function (e) { return e.token_uri }).indexOf(hash)
     data[index].checked = !data[index].checked
@@ -148,17 +132,14 @@ export default function NFTMap({
   }
 
   useEffect(() => {
-    setAll(unStakedList.length + stakedList.length)
-    setUnstaked(unStakedList.length)
-    setStaked(stakedList.length)
     ///////////////
     renderNFTs()
     //////////////
-    if ((unStakedList.length + stakedList.length) === 0) {
+    if ((stakedList.length + stakedList.length) === 0) {
       closeLoading()
     }
     // eslint-disable-next-line
-  }, [unStakedList, stakedList])
+  }, [stakedList, stakedList])
 
   return (
     <div className="map-page" style={{ paddingTop: !headerAlert ? 5 : 30 }}>
@@ -184,7 +165,7 @@ export default function NFTMap({
         setFilterState={(e) => setFilterState(e)}
         checkAble={checkAble}
         setCheckAble={(e) => setCheckAble(e)}
-        all={all}
+        all={unstaked + staked}
         unstaked={unstaked}
         staked={staked}
       />
@@ -224,11 +205,11 @@ export default function NFTMap({
             getNFTLIST={() => getNFTLIST()}
             openModal={() => setModal(true)}
             close={() => setModal(false)}
-            setCheckedCardByHash={(tokenAddress, tokenId, name, hash, image) =>
-              setCheckedCardByHash(tokenAddress, tokenId, name, hash, image)}
+            setCheckedCardByHash={(hash, image) =>
+              setCheckedCardByHash(hash, image)}
           />
         ))}
-        {(stakedList.lenth + unStakedList.length) === 0 &&
+        {(stakedList.lenth + stakedList.length) === 0 &&
           <h3 className="empty-text">
             You don&apos;t have any NFTs on this Wallet
           </h3>
