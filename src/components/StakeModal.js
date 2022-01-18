@@ -59,10 +59,8 @@ export default function StakeModal({
           await erc20Approve.wait()
           try {
             const isr = amount * Math.pow(10, 18)
-            console.log({ tokenAddress }, { tokenId }, isr.toLocaleString('fullwide', { useGrouping: false }), isr.toLocaleString('fullwide', { useGrouping: false }))
-            console.log(contract, "this is contract")
-            // const stakeAction = await contract.stakeByHash({tokenAddress}, {tokenId}, isr.toLocaleString('fullwide', { useGrouping: false }))
-            // await stakeAction.wait()
+            const stakeAction = await contract.stakeByHash({ tokenAddress }, { tokenId }, isr.toLocaleString('fullwide', { useGrouping: false }))
+            await stakeAction.wait()
             successAlert("Congratulation! You staked successfully.")
           } catch (err) {
             alertBox(err)

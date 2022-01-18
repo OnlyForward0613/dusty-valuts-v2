@@ -24,6 +24,7 @@ export default function NFTCard({
   cardId,
   setCheckedCardByHash,
   checkAble,
+  checkAbleState,
   close,
   ...props
 }) {
@@ -213,7 +214,7 @@ export default function NFTCard({
     <>
       {(filterState === action || filterState === 2) &&
         <div className={action !== 1 ? "nft-card" : "nft-card nft-card-active"}>
-          {checkAble &&
+          {((checkAbleState === 1 && action === 0) || (checkAbleState === 2 && action === 1)) &&
             <div className="card-checkbox" style={{ border: data.checked ? "2px solid #ccc" : "2px solid transparent" }} onClick={() => setCheckedCardByHash(hash, image)}>
               <button>
                 {data.checked ?
@@ -277,12 +278,12 @@ export default function NFTCard({
           }
           {!checkAble &&
             <div className="card-action">
-              {action !== 1 && !multiStakeAble &&
+              {(action === 0 && (checkAbleState !== 1)) &&
                 <DoActionButton onClick={() => setModal(true)} >
                   Stake
                 </DoActionButton>
               }
-              {action === 1 && !multiUnstakeAble &&
+              {(action === 1 && (checkAbleState !== 2)) &&
                 <UnstakeButton onClick={() => openUnstake()} disabled={unloading}>
                   {unloading ?
                     <ClipLoader loading={unloading} size={12} color="#fff" />
