@@ -123,6 +123,7 @@ export default function StakeModal({
           </div>
           <div className="modal-cover">
             <div className="modal-images">
+              {/* eslint-disable-next-line */}
               <img
                 src={image}
                 alt=""

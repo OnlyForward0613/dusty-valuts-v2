@@ -230,6 +230,7 @@ export default function NFTMap({
 
   useEffect(() => {
     setGalley()
+    // eslint-disable-next-line
   }, [hide])
 
   useEffect(() => {

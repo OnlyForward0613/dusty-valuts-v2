@@ -122,6 +122,7 @@ export default function MultiStakeModal({
 
   useEffect(() => {
     setGalley()
+    // eslint-disable-next-line
   }, [hide])
 
   return (
@@ -150,6 +151,7 @@ export default function MultiStakeModal({
             <div className="modal-images" style={{ transform: `translate(${count > 4 ? "13%, 10%" : count * 4 + "%, 10%"})` }}>
               {images.map((item, key) => (
                 key < 5 &&
+                // eslint-disable-next-line
                 <img
                   src={item}
                   alt=""
