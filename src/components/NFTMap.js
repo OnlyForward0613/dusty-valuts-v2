@@ -2,9 +2,10 @@ import { useEffect, useState } from "react"
 import NFTCard from "./NFTCard"
 import ItemFilter from "./ItemFilter"
 import MoreVertIcon from '@mui/icons-material/MoreVert'
-import { IconButton } from "@mui/material"
+import { ButtonGroup } from "@mui/material"
 import ClickAwayListener from '@mui/material/ClickAwayListener'
-import { DoActionButton, MoreMenuButton, CancelButton } from "./styleHook"
+import { DoActionButton, MoreMenuButton, CancelButton, OptionButton } from "./styleHook"
+import MultiStakeModal from "./MultiStakeModal"
 
 export default function NFTMap({
   groupNFT,
@@ -19,8 +20,9 @@ export default function NFTMap({
   checkAble,
   setCheckAble,
   getNFTLIST,
-  unstakedList,
+  unStakedList,
   stakedList,
+  balance,
   startLoading,
   closeLoading,
   headerAlert,
@@ -33,10 +35,10 @@ export default function NFTMap({
   const [more, setMore] = useState(false)
   const [multiStakeAble, setMultiStakeAble] = useState(false)
   const [multiUnstakeAble, setMultiUnstakeAble] = useState(false)
-
   const [selectCount, setSelectCount] = useState(0)
   const [renderArray, setRenderArray] = useState([])
 
+  const [modal, setModal] = useState(false)
   const [hide, setHide] = useState(false) // don't think about this. this is state for re-render
 
   let nftData = []
@@ -44,6 +46,7 @@ export default function NFTMap({
   const renderNFTs = (data) => {
     if (data) {
       setRenderArray(data)
+      setHide(!hide)
     } else {
       nftData = []
       if (stakedList.length !== 0) {
@@ -66,20 +69,20 @@ export default function NFTMap({
         }
       }
 
-      if (unstakedList.length !== 0) {
-        for (let j = 0; j < unstakedList.length; j++) {
+      if (unStakedList.length !== 0) {
+        for (let j = 0; j < unStakedList.length; j++) {
           const item = {
-            name: unstakedList[j].name,
-            token_address: unstakedList[j].token_address,
-            token_id: unstakedList[j].token_id,
-            token_uri: unstakedList[j].token_uri,
-            reward: unstakedList[j].reward,
-            action: unstakedList[j].action,
-            image: unstakedList[j].image,
-            description: unstakedList[j].description,
-            reward: unstakedList[j].reward,
-            percent: unstakedList[j].percent,
-            timestamp: unstakedList[j].timestamp,
+            name: unStakedList[j].name,
+            token_address: unStakedList[j].token_address,
+            token_id: unStakedList[j].token_id,
+            token_uri: unStakedList[j].token_uri,
+            reward: unStakedList[j].reward,
+            action: unStakedList[j].action,
+            image: unStakedList[j].image,
+            description: unStakedList[j].description,
+            reward: unStakedList[j].reward,
+            percent: unStakedList[j].percent,
+            timestamp: unStakedList[j].timestamp,
             checked: false
           }
           nftData.push(item)
@@ -93,6 +96,7 @@ export default function NFTMap({
     let data = renderArray
     const index = data.map(function (e) { return e.token_uri }).indexOf(hash)
     data[index].checked = !data[index].checked
+    data[index].image = image
     renderNFTs(data)
     setCount()
     setHide(!hide) //for re-render
@@ -135,27 +139,34 @@ export default function NFTMap({
     setCheckAble(false)
     setMultiStakeAble(false)
     setMultiUnstakeAble(false)
+    deselectAll()
   }
+
+  const openStakeModal = () => {
+    setModal(true)
+    setHide(!hide)
+  }
+
   useEffect(() => {
-    setAll(unstakedList.length + stakedList.length)
-    setUnstaked(unstakedList.length)
+    setAll(unStakedList.length + stakedList.length)
+    setUnstaked(unStakedList.length)
     setStaked(stakedList.length)
     ///////////////
     renderNFTs()
     //////////////
-    if ((unstakedList.length + stakedList.length) === 0) {
+    if ((unStakedList.length + stakedList.length) === 0) {
       closeLoading()
     }
     // eslint-disable-next-line
-  }, [unstakedList, stakedList])
+  }, [unStakedList, stakedList])
 
   return (
     <div className="map-page" style={{ paddingTop: !headerAlert ? 5 : 30 }}>
       <ClickAwayListener onClickAway={() => setMore(false)}>
         <div className="more-option" style={{ paddingTop: !headerAlert ? 90 : 115 }}>
-          <IconButton component="span" style={{ border: "1px solid #ccc" }} size="small" onClick={() => setMore(!more)}>
+          <button className="more-menu-button" onClick={() => setMore(!more)}>
             <MoreVertIcon style={{ color: "#fff" }} />
-          </IconButton>
+          </button>
           {more &&
             <div className="more-menu">
               <div className="more-menu-item">
@@ -178,19 +189,19 @@ export default function NFTMap({
         staked={staked}
       />
       {multiStakeAble &&
-        <div className="multi-infobox">
+        <div className="multi-infobox" style={{ top: !headerAlert ? 69 : 94 }}>
           <p><span>{selectCount}</span>Selected</p>
+          <ButtonGroup variant="contained">
+            <OptionButton onClick={() => selectAll()}>Select All</OptionButton>
+            <OptionButton onClick={() => deselectAll()}>Deselect All</OptionButton>
+          </ButtonGroup>
           <div className="infobox-button">
-            <DoActionButton onClick={() => selectAll()}>Select All</DoActionButton>
+            <ButtonGroup variant="contained">
+              <DoActionButton onClick={() => openStakeModal()} disabled={selectCount === 0}>stake</DoActionButton>
+              <CancelButton onClick={() => calcelMulti()}>cancel</CancelButton>
+            </ButtonGroup>
           </div>
           <div className="infobox-button">
-            <DoActionButton onClick={() => deselectAll()}>Deselect All</DoActionButton>
-          </div>
-          <div className="infobox-button">
-            <DoActionButton>stake</DoActionButton>
-          </div>
-          <div className="infobox-button">
-            <CancelButton onClick={() => calcelMulti()}>cancel</CancelButton>
           </div>
         </div>
       }
@@ -211,16 +222,26 @@ export default function NFTMap({
             checkAble={checkAble}
             setCheckAble={(e) => setCheckAble(e)}
             getNFTLIST={() => getNFTLIST()}
+            openModal={() => setModal(true)}
+            close={() => setModal(false)}
             setCheckedCardByHash={(tokenAddress, tokenId, name, hash, image) =>
               setCheckedCardByHash(tokenAddress, tokenId, name, hash, image)}
           />
         ))}
-        {(stakedList.lenth + unstakedList.length) === 0 &&
+        {(stakedList.lenth + unStakedList.length) === 0 &&
           <h3 className="empty-text">
             You don&apos;t have any NFTs on this Wallet
           </h3>
         }
       </div>
-    </div>
+      <MultiStakeModal
+        open={modal}
+        close={() => setModal(false)}
+        balance={balance}
+        count={selectCount}
+        data={renderArray}
+        hide={hide}
+      />
+    </div >
   )
 }

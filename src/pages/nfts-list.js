@@ -23,11 +23,9 @@ export default function NFTLIST({
 }) {
 
   let stakedNfts = []
-  let unStakedNfts = []
   const [filterState, setFilterState] = useState(2)
-
   const [stakedList, setStakedList] = useState([])
-  const [unstakedList, setUnstakedList] = useState([])
+  const [unStakedList, setUnstakedList] = useState([])
   const [checkAble, setCheckAble] = useState(false)
   const [connected, setConnected] = useState(false)
   const [signerAddress, setSignerAddress] = useState("")
@@ -69,8 +67,7 @@ export default function NFTLIST({
     }
   }
 
-  const setStakedNFTs = async () => {
-    stakedNfts = []
+  const setPastNFTs = async () => {
     startLoading()
     const web3 = new Web3(Web3.givenProvider)
     const accounts = await web3.eth.getAccounts()
@@ -88,56 +85,29 @@ export default function NFTLIST({
       SMARTCONTRACT_ABI,
       signer
     )
-    const total = await contract.staked(accounts[0])
-    if (parseInt(total.toString()) !== 0) {
-      for (var i = 0; i < total; i++) {
-        const nftData = await contract.activities(accounts[0], i)
-        if (nftData.action === 1) {
-          stakedNfts.push({
-            cid: i,
-            name: nftData.name,
-            token_address: nftData.NFTAddress,
-            token_id: nftData.NFTId.toString(),
-            token_uri: nftData.hash,
-            reward: nftData.reward.toString(),
-            action: nftData.action,
-            image: nftData.imghash,
-            description: nftData.description,
-            reward: nftData.reward.toString(),
-            percent: nftData.percent.toString(),
-            timestamp: nftData.timestamp.toString(),
-          })
-        }
-      }
-    }
-    setStakedList(stakedNfts)
-    closeLoading()
-  }
-
-  const setPastNFTs = async () => {
-    startLoading()
-    unStakedNfts = []
-    const web3 = new Web3(Web3.givenProvider)
-    const accounts = await web3.eth.getAccounts()
-    const userNFTs = await Moralis.Web3API.account.getNFTs({ address: accounts[0] })
-    console.log(userNFTs)
+    stakedNfts = []
+    const userNFTs = await Moralis.Web3API.account.getNFTs({ chain: 'bsc testnet', address: accounts[0] })
     if (userNFTs.total !== 0) {
       startLoading()
       for (var i = 0; i < userNFTs.result.length; i++) {
-        unStakedNfts.push({
-          cid: -1,
-          name: userNFTs.result[i].name,
-          action: 0,
-          token_address: userNFTs.result[i].token_address,
-          token_id: userNFTs.result[i].token_id,
-          reward: 0,
-          timestamp: "0",
-          percent: 0,
-          token_uri: userNFTs.result[i].token_uri,
-        })
+        if (userNFTs.result[i].name !== "MoM") {
+          const nftDump = await contract.status(accounts[0], userNFTs.result[i].token_address, userNFTs.result[i].token_id)
+          console.log(nftDump.action, nftDump.stakedTime.toString())
+          stakedNfts.push({
+            cid: -1,
+            name: userNFTs.result[i].name,
+            action: nftDump.action,
+            token_address: userNFTs.result[i].token_address,
+            token_id: userNFTs.result[i].token_id,
+            reward: nftDump.reward,
+            timestamp: nftDump.stakedTime.toString(),
+            percent: nftDump.percent,
+            token_uri: userNFTs.result[i].token_uri,
+          })
+        }
       }
       closeLoading()
-      setUnstakedList(unStakedNfts)
+      setUnstakedList(stakedNfts)
     } else {
       closeLoading()
     }
@@ -211,10 +181,11 @@ export default function NFTLIST({
             setCheckAble={(e) => setCheckAble(e)}
             getNFTLIST={() => getNFTLIST()}
             stakedList={stakedList}
-            unstakedList={unstakedList}
+            unStakedList={unStakedList}
             startLoading={startLoading}
             closeLoading={closeLoading}
             headerAlert={headerAlert}
+            balance={signerBalance}
           />
         </div>
       </MainContent>

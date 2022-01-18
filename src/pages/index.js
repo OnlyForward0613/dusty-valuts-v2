@@ -60,32 +60,31 @@ export default function Home({ headerAlert, closeAlert }) {
         signer
       )
 
-      console.log(contract, "contraccttt")
-      // contract_20 = new ethers.Contract(
-      //   SMARTCONTRACT_ADDRESS_ERC20,
-      //   SMARTCONTRACT_ABI_ERC20,
-      //   signer
-      // )
-      // const bal = await contract_20.balanceOf(address)
-      // setSignerBalance(ethers.utils.formatEther(bal))
+      contract_20 = new ethers.Contract(
+        SMARTCONTRACT_ADDRESS_ERC20,
+        SMARTCONTRACT_ABI_ERC20,
+        signer
+      )
+      const bal = await contract_20.balanceOf(address)
+      setSignerBalance(ethers.utils.formatEther(bal))
 
-      // const totalS = await contract_20.totalSupply()
-      // setTotalSupply(ethers.utils.formatEther(totalS))
+      const totalS = await contract_20.totalSupply()
+      setTotalSupply(ethers.utils.formatEther(totalS))
 
-      // const totlass = await contract_20.holders()
-      // setHolders(totlass.toString())
+      const totlass = await contract_20.holders()
+      setHolders(totlass.toString())
 
-      // const early = await contract.earlyRemoved()
-      // setEarlyRemoved(early.toString())
+      const early = await contract.earlyRemoved()
+      setEarlyRemoved(early.toString())
 
-      // const totalN = await contract_20.balanceOf(SMARTCONTRACT_ADDRESS)
-      // setTotalDusty(totalN.toString())
+      const totalN = await contract_20.balanceOf(SMARTCONTRACT_ADDRESS)
+      setTotalDusty(totalN.toString())
 
-      // const Obal = await contract.bonusPool()
-      // setTotalOwnerDusty(parseFloat(Obal.toString()) + parseFloat(1114))
+      const Obal = await contract.bonusPool()
+      setTotalOwnerDusty(parseFloat(Obal.toString()) + parseFloat(1114))
 
-      // const sta = await contract.totalStaked()
-      // setStaked(sta.toString())
+      const sta = await contract.totalStaked()
+      setStaked(sta.toString())
 
       setHomeloading(false) //loading off
 

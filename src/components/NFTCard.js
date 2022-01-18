@@ -6,9 +6,9 @@ import { errorAlert, successAlert, warningAlert } from './toastGroup'
 import { ethers } from "ethers"
 import { SMARCONTRACT_INI_ABI, SMARTCONTRACT_ABI, SMARTCONTRACT_ABI_ERC20, SMARTCONTRACT_ADDRESS, SMARTCONTRACT_ADDRESS_ERC20 } from "../../config"
 import Swal from 'sweetalert2'
-import CardModal from "./CardModal"
 import Web3Modal from "web3modal"
 import { Skeleton } from "@mui/material"
+import StakeModal from "./StakeModal"
 
 export default function NFTCard({
   state,
@@ -24,6 +24,7 @@ export default function NFTCard({
   cardId,
   setCheckedCardByHash,
   checkAble,
+  close,
   ...props
 }) {
   const [days, setDays] = useState(0)
@@ -46,6 +47,8 @@ export default function NFTCard({
   const [realName, setRealName] = useState("")
   const [indiContract, setIndiContract] = useState([])
   const [unloading, setUnloading] = useState(false)
+
+  const [modal, setModal] = useState(false)
 
   const alertBox = (err) => {
     setUnloading(false)
@@ -209,10 +212,9 @@ export default function NFTCard({
   return (
     <>
       {(filterState === action || filterState === 2) &&
-        <div className={action !== 1 ? "nft-card" : "nft-card nft-card-active"} onClick={() => setCheckedCardByHash(tokenAddress, tokenId, name, hash, image)}>
-          {/* <div className="card-checkbox"> */}
+        <div className={action !== 1 ? "nft-card" : "nft-card nft-card-active"}>
           {checkAble &&
-            <div className="card-checkbox" style={{ border: data.checked ? "2px solid #ccc" : "2px solid transparent" }}>
+            <div className="card-checkbox" style={{ border: data.checked ? "2px solid #ccc" : "2px solid transparent" }} onClick={() => setCheckedCardByHash(tokenAddress, tokenId, name, hash, image)}>
               <button>
                 {data.checked ?
                   <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -276,7 +278,7 @@ export default function NFTCard({
           {!checkAble &&
             <div className="card-action">
               {action !== 1 && !multiStakeAble &&
-                <DoActionButton onClick={() => setOpen(true)}>
+                <DoActionButton onClick={() => setModal(true)} >
                   Stake
                 </DoActionButton>
               }
@@ -296,24 +298,18 @@ export default function NFTCard({
               <Countdown date={new Date(parseInt(stakedTime) * 1000 + 365 * 24 * 3600 * 1000 + 7000)} onTick={(e) => handleTime(e)} onComplete={() => autoClaim()} />
             </div>
           }
-          <CardModal
-            name={name}
-            realName={realName}
-            description={description}
-            image={image}
-            indiContract={indiContract}
-            tokenAddress={tokenAddress}
-            tokenId={tokenId}
-            hash={hash}
-            balance={balance}
-            address={address}
-            alertBox={(e) => alertBox(e)}
-            open={open}
-            reRender={reRender}
-            close={() => setOpen(false)}
-          />
         </div>
       }
+      <StakeModal
+        open={modal}
+        close={() => setModal(false)}
+        image={image}
+        description={description}
+        name={name}
+        tokenId={tokenId}
+        balance={balance}
+        tokenAddress={tokenAddress}
+      />
     </>
   )
 }

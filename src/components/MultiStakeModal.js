@@ -1,38 +1,41 @@
 import { Box, Checkbox, IconButton, Modal } from "@mui/material"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { ClipLoader } from "react-spinners"
-import { SMARTCONTRACT_ABI, SMARTCONTRACT_ABI_ERC20, SMARTCONTRACT_ADDRESS, SMARTCONTRACT_ADDRESS_ERC20 } from "../../config"
 import CostSlider from "./CostSlider"
 import { BigStakeButton, BpCheckedIcon, BpIcon } from "./styleHook"
 import { errorAlert, successAlert, warningAlert } from "./toastGroup"
-import Web3Modal from "web3modal"
-import { ethers } from "ethers"
+import Web3Modal from 'web3modal'
+import { ethers } from 'ethers'
+import { SMARTCONTRACT_ABI, SMARTCONTRACT_ABI_ERC20, SMARTCONTRACT_ADDRESS, SMARTCONTRACT_ADDRESS_ERC20 } from "../../config"
 
-export default function CardModal({
-  name,
-  image,
-  description,
+export default function MultiStakeModal({
   open,
   close,
-  indiContract,
-  tokenAddress,
-  tokenId,
   balance,
-  address,
-  hash,
-  realName,
-  reRender,
-  ...props }) {
-  const [agree, setAgree] = useState(false)
-  const [amount, setAmount] = useState(1)
+  image,
+  count,
+  data,
+  hide,
+  ...props
+}) {
   const [loading, setLoading] = useState(false)
   const [agreeVali, setAgreeVali] = useState(false)
+  const [agree, setAgree] = useState(false)
+  const [amount, setAmount] = useState(1)
+  const [real, setReal] = useState(1)
+  const [step, setStep] = useState(0)
+  const steps = [0.01, 0.1, 0.12, 0.15, 0.2, 0.25, 0.35, 0.42, 0.5]
+  const [images, setImages] = useState([])
+  const [addressArray, setAddressArray] = useState([])
+  const [idArray, setIDArray] = useState([])
 
   const handleChange = (e) => {
     setAgree(e.target.checked)
     setAgreeVali(false)
   }
+
   const stake = async () => {
+    setLoading(true)
     const web3Modal = new Web3Modal()
     const connection = await web3Modal.connect()
     const provider = new ethers.providers.Web3Provider(connection)
@@ -48,42 +51,32 @@ export default function CardModal({
       SMARTCONTRACT_ABI,
       signer
     )
-
-    if (parseFloat(balance) > parseFloat(amount)) {
+    if (parseFloat(balance) > parseFloat(amount) * count) {
       if (agree) {
-        setLoading(true)
         try {
-          const indiApprove = await indiContract.approve(SMARTCONTRACT_ADDRESS, tokenId)
-          await indiApprove.wait()
+          const isr = count * amount * Math.pow(10, 18)
+          const erc20Approve = await contract20.approve(SMARTCONTRACT_ADDRESS, isr.toLocaleString('fullwide', { useGrouping: false }))
+          await erc20Approve.wait()
           try {
             const isr = amount * Math.pow(10, 18)
-            const erc20Approve = await contract20.approve(SMARTCONTRACT_ADDRESS, isr.toLocaleString('fullwide', { useGrouping: false }))
-            await erc20Approve.wait()
-            try {
-              const isr = amount * Math.pow(10, 18)
-              const nftApprove = await contract.stakebyHash(hash, realName, tokenAddress, tokenId, isr.toLocaleString('fullwide', { useGrouping: false }), image, description)
-              await nftApprove.wait()
-              successAlert("Congratulation! You staked successfully.")
-              close()
-              setTimeout(() => {
-                location.reload()
-              }, 5000);
-            } catch (err) {
-              alertBox(err)
-            }
+            console.log(addressArray, idArray, isr.toLocaleString('fullwide', { useGrouping: false }))
+            console.log(contract, "this is contract")
+            const stakeAction = await contract.stakeByHash(addressArray, idArray, isr.toLocaleString('fullwide', { useGrouping: false }))
+            await stakeAction.wait()
+            successAlert("Congratulation! You staked successfully.")
           } catch (err) {
             alertBox(err)
           }
         } catch (err) {
           alertBox(err)
         }
-        setLoading(false)
       } else {
         setAgreeVali(true)
       }
     } else {
       errorAlert("You don't have enough Dusty!")
     }
+    setLoading(false)
   }
 
   const alertBox = (err) => {
@@ -98,6 +91,28 @@ export default function CardModal({
       errorAlert("We found the error. Please try again!")
     }
   }
+  const setGalley = () => {
+    if (data.length !== 0) {
+      let imgs = []
+      let add_Array = []
+      let id_Array = []
+      data.map((e) => {
+        if (e.checked) {
+          imgs.push(e.image)
+          add_Array.push(e.token_address)
+          id_Array.push(e.token_id)
+        }
+      })
+      setImages(imgs)
+      setAddressArray(add_Array)
+      setIDArray(id_Array)
+    }
+  }
+
+  useEffect(() => {
+    setGalley()
+  }, [hide])
+
   return (
     <Modal
       open={open}
@@ -120,23 +135,34 @@ export default function CardModal({
               </svg>
             </IconButton>
           </div>
-          <div className="modal-image">
-            {/* eslint-disable-next-line */}
-            <img
-              src={image}
-              alt=""
-            />
-            <p className="modal-info">For security reasons, you will need 3 separate contract confirmations</p>
+          <div className="modal-cover">
+            <div className="modal-images" style={{ transform: `translate(${count > 4 ? "13%, 10%" : count * 4 + "%, 10%"})` }}>
+              {images.map((item, key) => (
+                key < 5 &&
+                <img
+                  src={item}
+                  alt=""
+                  key={key}
+                />
+              ))}
+            </div>
+            <div className="modal-cover-content">
+              <h1>{count} NFT{count !== 1 && "s"}</h1>
+              <div className="balence-info">
+                <p className="reward-value">Value:&nbsp;$Dusty&nbsp;<span>{(parseFloat(real) * count).toFixed(2)}</span></p>
+              </div>
+              <p className="reward-value">You can earn&nbsp;<span className="gold-color">$Dusty&nbsp;<span>{((parseFloat(real) + parseFloat(real) * steps[step]) * count).toFixed(2)}</span></span> after 12 months.</p>
+              <p className="reward-value">+<span className="gold-color" style={{ fontSize: 12 }}>&nbsp;{(real * steps[step]).toFixed(2)} {count !== 1 && <>&nbsp;x&nbsp;{count} = {(real * steps[step] * count).toFixed(2)}</>}</span> $dusty</p>
+            </div>
           </div>
           <div className="modal-content">
-            <p>Name</p>
-            <h5>{name}</h5>
-            <p>Description</p>
-            <h5>{description}</h5>
             <CostSlider
               setAmount={(value) => setAmount(value)}
               balance={balance}
               disabled={loading}
+              count={count}
+              setReal={(e) => setReal(e)}
+              setStep={(e) => setStep(e)}
             />
             <div className="agree-mode">
               <Checkbox
@@ -155,7 +181,7 @@ export default function CardModal({
               }
             </div>
             <div className="modal-action">
-              <BigStakeButton onClick={() => stake()} disabled={loading}>
+              <BigStakeButton disabled={loading} onClick={() => stake()}>
                 {loading ?
                   <ClipLoader loading={loading} size={24} color="#fff" />
                   :
@@ -175,9 +201,10 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 640,
+  width: 680,
   bgcolor: '#333',
   boxShadow: 24,
   borderRadius: "12px",
-  p: 4,
+  p: 3,
+
 }

@@ -2,12 +2,15 @@
 $primary-color: #d95dff;
 $dark-gray: #333;
 $light-gray: #777;
-
+$gold-color: #fad657;
 * {
   margin: 0;
   padding: 0;
   font-family: "Open Sans", sans-serif;
   box-sizing: border-box;
+}
+.gold-color {
+  color: $gold-color;
 }
 .swal2-title {
   font-size: 18px !important;
@@ -318,9 +321,6 @@ body {
     font-family: sans-serif;
   }
 }
-.stake-modal {
-  display: flex;
-}
 .modal-image {
   width: 200px;
   height: 200px;
@@ -340,9 +340,55 @@ body {
     border-radius: 4px;
   }
 }
+.modal-cover {
+  display: flex;
+}
+.modal-images {
+  width: 280px;
+  height: 250px;
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 30px;
+  img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 6px;
+    box-shadow: 0 0 12px 5px #00000047;
+    position: absolute;
+    z-index: 6;
+    &:nth-child(2) {
+      transform: rotate(-12deg) translate(-17px, -20px);
+      z-index: 5;
+    }
+    &:nth-child(3) {
+      transform: rotate(-24deg) translate(-28px, -43px);
+      z-index: 4;
+    }
+    &:nth-child(4) {
+      transform: rotate(-33deg) translate(-34px, -64px);
+      filter: blur(2px);
+      z-index: 3;
+    }
+  }
+}
+.modal-cover-content {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  justify-content: end;
+  padding-bottom: 20px;
+  width: calc(100% - 280px);
+  h1 {
+    color: #fff;
+    text-align: right;
+    border-bottom: 1px solid #ffffff9c;
+  }
+}
 .modal-content {
-  width: calc(100% - 220px);
-  margin-left: 20px;
   p {
     font-size: 10px;
     color: #88ffb7;
@@ -359,18 +405,26 @@ body {
 p.your-balance {
   font-size: 14px;
   text-align: right;
-  padding-bottom: 40px;
   span {
     font-size: 22px;
     font-weight: 600;
   }
 }
 .reward-value {
-  font-size: 14px !important;
+  font-size: 12px !important;
+  text-align: right;
+  font-weight: bold;
+  color: #fff;
   span {
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 600;
   }
+}
+.pretto {
+  padding: 51px 30px 10px;
+  border-radius: 12px;
+  background-color: #252525;
+  border: 1px solid #ffffff80;
 }
 .agree-mode {
   display: flex;
@@ -406,8 +460,7 @@ input.reward-input {
   margin-top: 20px;
 }
 .balence-info {
-  display: flex;
-  justify-content: space-between;
+  text-align: right;
 }
 .modal-close {
   position: absolute;
@@ -459,6 +512,19 @@ h3.empty-text {
   left: 15px;
   top: 15px;
 }
+.more-menu-button {
+  border: 1px solid #ccc;
+  background: transparent;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    background-color: #ffffff3f;
+  }
+}
 @media (max-width: 1200px) {
   .nft-card {
     width: calc(33% - 20px);
@@ -467,6 +533,25 @@ h3.empty-text {
   }
 }
 @media (max-width: 776px) {
+  .infobox-button {
+    margin-top: 10px;
+  }
+  .more-menu-button {
+    width: 24px;
+    height: 24px;
+  }
+  .modal-cover {
+    flex-direction: column;
+  }
+  .modal-cover-content {
+    width: 100%;
+  }
+  .more-option {
+    right: 5px !important;
+  }
+  .multi-infobox {
+    flex-wrap: wrap;
+  }
   .header-alert {
     font-size: 12px;
     padding: 5px 5px;
@@ -893,6 +978,9 @@ p.signer-balance {
 .header-logo i {
   display: block;
 }
+.modal-box {
+  outline: none;
+}
 @media (max-width: 768px) {
   .header-logo i {
     display: none;
@@ -918,11 +1006,6 @@ p.signer-balance {
     height: 100% !important;
     overflow-y: auto;
   }
-  .stake-modal {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
   .dashboard-item {
     width: 100%;
     margin-right: 0 !important;
@@ -932,10 +1015,6 @@ p.signer-balance {
   .modal-image {
     margin-bottom: 20px;
     height: auto;
-  }
-  .modal-content {
-    width: 100% !important;
-    margin-left: 0 !important;
   }
   p.signer-balance span:last-child {
     font-size: 14px;
@@ -1185,7 +1264,12 @@ p.signer-balance {
   padding: 10px 0;
   border-top: 1px solid #ffffff75;
   border-bottom: 1px solid #ffffff75;
-  background: #ffffff14;
+  background: #232837;
+  position: sticky;
+  top: 94px;
+  z-index: 90;
+  margin-left: -15px;
+  margin-right: -15px;
   p {
     color: #fff;
     font-size: 18px;

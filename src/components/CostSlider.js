@@ -76,10 +76,11 @@ export default function CostSlider({
   setAmount,
   balance,
   disabled,
+  count,
+  setReal,
+  setStep,
   ...props
 }) {
-  const [real, setReal] = React.useState(1)
-  const [step, setStep] = React.useState(0)
   const steps = [0.01, 0.1, 0.12, 0.15, 0.2, 0.25, 0.35, 0.42, 0.5]
 
   const handleChange = (event, newValue) => {
@@ -110,32 +111,35 @@ export default function CostSlider({
   }
   return (
     <Box>
-      <p className="your-balance">Your balance:&nbsp;$Dusty&nbsp;
-        <span>{new Intl.NumberFormat().format(parseFloat(balance).toFixed(2))}</span>
-      </p>
-      <PrettoSlider
-        defaultValue={1}
-        scale={calculateValue}
-        step={0.1}
-        getAriaValueText={valueLabelFormat}
-        valueLabelFormat={valueLabelFormat}
-        valueLabelDisplay="on"
-        marks={marks}
-        max={50}
-        disabled={disabled}
-        onChange={handleChange}
-      />
-      <div className="balence-info">
+      {/* <div className="balence-info">
         <p className="reward-value">Value:&nbsp;$Dusty&nbsp;<span>{real}</span></p>
       </div>
-      <p className="reward-value">You can earn&nbsp;$Dusty&nbsp;<span>{(real * steps[step]).toFixed(2)}</span> after 12 months.</p>
+      <p className="reward-value">You can earn&nbsp;$Dusty&nbsp;<span>{(real * steps[step]).toFixed(2) * count}</span> after 12 months.</p>
+      <p className="reward-value">+&nbsp;{(real * steps[step]).toFixed(2)}&nbsp;x&nbsp;{count} = {(real * steps[step]).toFixed(2) * count}</p> */}
+      <div className="pretto">
+        <PrettoSlider
+          defaultValue={1}
+          scale={calculateValue}
+          step={0.1}
+          getAriaValueText={valueLabelFormat}
+          valueLabelFormat={valueLabelFormat}
+          valueLabelDisplay="on"
+          marks={marks}
+          max={50}
+          disabled={disabled}
+          onChange={handleChange}
+        />
+        <p className="your-balance">Your balance:&nbsp;$Dusty&nbsp;
+          <span>{new Intl.NumberFormat().format(parseFloat(balance).toFixed(2))}</span>
+        </p>
+      </div>
     </Box>
   )
 }
 
 const PrettoSlider = styled(Slider)({
   color: '#52af77',
-  height: 8,
+  height: 6,
   '& .MuiSlider-track': {
     border: 'none',
   },
