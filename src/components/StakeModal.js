@@ -7,6 +7,7 @@ import { BigStakeButton, BpCheckedIcon, BpIcon } from './styleHook'
 import { errorAlert, successAlert, warningAlert } from './toastGroup'
 import { ethers } from 'ethers'
 import Web3Modal from 'web3modal'
+import Swal from 'sweetalert2'
 
 export default function StakeModal({
   open,
@@ -59,11 +60,21 @@ export default function StakeModal({
           await erc20Approve.wait()
           try {
             const isr = amount * Math.pow(10, 18)
-            const stakeAction = await contract.stakeByHash({ tokenAddress }, { tokenId }, isr.toLocaleString('fullwide', { useGrouping: false }))
+            const stakeAction = await contract.stakeByHash([tokenAddress], [tokenId], isr.toLocaleString('fullwide', { useGrouping: false }))
             await stakeAction.wait()
-            successAlert("Congratulation! You staked successfully.")
+            close()
+            Swal.fire({
+              title: 'Congratulation! You staked successfully.',
+              showCancelButton: true,
+              confirmButtonText: 'CONFIRM',
+            }).then((result) => {
+              if (result.isConfirmed) {
+                location.reload()
+              }
+            })
           } catch (err) {
             alertBox(err)
+            console.log(err)
           }
         } catch (err) {
           alertBox(err)

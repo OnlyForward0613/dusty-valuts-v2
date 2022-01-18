@@ -1,11 +1,17 @@
-import { useEffect, useState } from "react"
-import NFTCard from "./NFTCard"
-import ItemFilter from "./ItemFilter"
+import { useEffect, useState } from 'react'
+import NFTCard from './NFTCard'
+import ItemFilter from './ItemFilter'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
-import { ButtonGroup } from "@mui/material"
+import { ButtonGroup } from '@mui/material'
 import ClickAwayListener from '@mui/material/ClickAwayListener'
-import { DoActionButton, MoreMenuButton, CancelButton, OptionButton, UnstakeButton } from "./styleHook"
-import MultiStakeModal from "./MultiStakeModal"
+import { DoActionButton, MoreMenuButton, CancelButton, OptionButton, UnstakeButton } from './styleHook'
+import MultiStakeModal from './MultiStakeModal'
+import { errorAlert, successAlert, warningAlert } from './toastGroup'
+import Web3Modal from 'web3modal'
+import { ethers } from 'ethers'
+import { SMARTCONTRACT_ABI, SMARTCONTRACT_ADDRESS } from '../../config'
+import MapPageLoading from '../components/MapPageLoading'
+import Swal from 'sweetalert2'
 
 export default function NFTMap({
   groupNFT,
@@ -35,6 +41,10 @@ export default function NFTMap({
   const [multiUnstakeAble, setMultiUnstakeAble] = useState(false)
   const [selectCount, setSelectCount] = useState(0)
   const [renderArray, setRenderArray] = useState([])
+
+  const [loading, setLoading] = useState(false)
+  const [addressArray, setAddressArray] = useState([])
+  const [idArray, setIDArray] = useState([])
 
   const [modal, setModal] = useState(false)
   const [hide, setHide] = useState(false) // don't think about this. this is state for re-render
@@ -118,6 +128,22 @@ export default function NFTMap({
     setSelectCount(cnt)
   }
 
+  const setGalley = () => {
+    let data = renderArray
+    if (data.length !== 0) {
+      let add_Array = []
+      let id_Array = []
+      data.map((e) => {
+        if (e.checked) {
+          add_Array.push(e.token_address)
+          id_Array.push(e.token_id)
+        }
+      })
+      setAddressArray(add_Array)
+      setIDArray(id_Array)
+    }
+  }
+
   const deselectAll = () => {
     let data = renderArray
     data.map((e) => e.checked = false)
@@ -147,9 +173,64 @@ export default function NFTMap({
     setHide(!hide)
   }
 
-  const unstake = () => {
-
+  const openUnstake = () => {
+    Swal.fire({
+      title: 'Do you really want to remove this NFT from the vault? You will lose all $Dusty associated with it',
+      showCancelButton: true,
+      confirmButtonText: 'Unstake',
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        unstake()
+      }
+    })
   }
+
+  const unstake = async () => {
+    setLoading(true)
+    setGalley()
+    const web3Modal = new Web3Modal()
+    const connection = await web3Modal.connect()
+    const provider = new ethers.providers.Web3Provider(connection)
+    const signer = provider.getSigner()
+
+    const contract = new ethers.Contract(
+      SMARTCONTRACT_ADDRESS,
+      SMARTCONTRACT_ABI,
+      signer
+    )
+    try {
+      if (addressArray.length !== 0) {
+        const stakeAction = await contract.unStake(addressArray, idArray)
+        await stakeAction.wait()
+        successAlert("Your unstaking has been successfully completed.")
+        calcelMulti()
+        setTimeout(() => {
+          location.reload()
+        }, 5000);
+      }
+    } catch (err) {
+      alertBox(err)
+    }
+    setLoading(false)
+  }
+
+  const alertBox = (err) => {
+    setLoading(false)
+    if (err.code === 4001) {
+      warningAlert("You denied the Action!")
+    } else if (err.data !== undefined) {
+      errorAlert(err.data.message)
+    } else if (err.message !== undefined) {
+      errorAlert(err.message)
+    } else {
+      errorAlert("We found the error. Please try again!")
+    }
+  }
+
+  useEffect(() => {
+    setGalley()
+  }, [hide])
 
   useEffect(() => {
     renderNFTs()
@@ -188,7 +269,7 @@ export default function NFTMap({
         staked={staked}
       />
       {checkAble &&
-        <div className="multi-infobox" style={{ top: !headerAlert ? 69 : 94 }}>
+        <div className="multi-infobox" style={{ top: !headerAlert ? 67 : 97 }}>
           <p><span>{selectCount}</span>Selected</p>
           <ButtonGroup variant="contained">
             <OptionButton onClick={() => selectAll()}>Select All</OptionButton>
@@ -200,7 +281,7 @@ export default function NFTMap({
                 <DoActionButton onClick={() => openStakeModal()} disabled={selectCount === 0}>stake</DoActionButton>
               }
               {multiUnstakeAble &&
-                <UnstakeButton onClick={() => unstake()} disabled={selectCount === 0}>unstake</UnstakeButton>
+                <UnstakeButton onClick={() => openUnstake()} disabled={selectCount === 0}>unstake</UnstakeButton>
               }
               <CancelButton onClick={() => calcelMulti()}>cancel</CancelButton>
             </ButtonGroup>
@@ -227,6 +308,8 @@ export default function NFTMap({
             getNFTLIST={() => getNFTLIST()}
             openModal={() => setModal(true)}
             close={() => setModal(false)}
+            startLoading={() => setLoading(true)}
+            closeLoading={() => setLoading(false)}
             setCheckedCardByHash={(hash, image) =>
               setCheckedCardByHash(hash, image)}
           />
@@ -244,7 +327,11 @@ export default function NFTMap({
         count={selectCount}
         data={renderArray}
         hide={hide}
+        calcelMulti={() => calcelMulti()}
       />
+      {loading &&
+        <MapPageLoading loading={loading} />
+      }
     </div >
   )
 }

@@ -7,6 +7,7 @@ import { errorAlert, successAlert, warningAlert } from "./toastGroup"
 import Web3Modal from 'web3modal'
 import { ethers } from 'ethers'
 import { SMARTCONTRACT_ABI, SMARTCONTRACT_ABI_ERC20, SMARTCONTRACT_ADDRESS, SMARTCONTRACT_ADDRESS_ERC20 } from "../../config"
+import Swal from "sweetalert2"
 
 export default function MultiStakeModal({
   open,
@@ -16,6 +17,7 @@ export default function MultiStakeModal({
   count,
   data,
   hide,
+  calcelMulti,
   ...props
 }) {
   const [loading, setLoading] = useState(false)
@@ -59,11 +61,19 @@ export default function MultiStakeModal({
           await erc20Approve.wait()
           try {
             const isr = amount * Math.pow(10, 18)
-            console.log(addressArray, idArray, isr.toLocaleString('fullwide', { useGrouping: false }))
-            console.log(contract, "this is contract")
             const stakeAction = await contract.stakeByHash(addressArray, idArray, isr.toLocaleString('fullwide', { useGrouping: false }))
             await stakeAction.wait()
-            successAlert("Congratulation! You staked successfully.")
+            calcelMulti()
+            close()
+            Swal.fire({
+              title: 'Congratulation! You staked successfully.',
+              showCancelButton: true,
+              confirmButtonText: 'CONFIRM',
+            }).then((result) => {
+              if (result.isConfirmed) {
+                location.reload()
+              }
+            })
           } catch (err) {
             alertBox(err)
           }
@@ -91,6 +101,7 @@ export default function MultiStakeModal({
       errorAlert("We found the error. Please try again!")
     }
   }
+
   const setGalley = () => {
     if (data.length !== 0) {
       let imgs = []

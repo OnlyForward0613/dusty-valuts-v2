@@ -5,6 +5,7 @@ import { PANCAKE_LINK, SMARTCONTRACT_ADDRESS_ERC20 } from "../../config"
 import { importToken } from "../hook/ethereum"
 import { SidebarButton } from "./styleHook"
 import { successAlert } from "./toastGroup"
+import Moralis from "moralis"
 
 export default function Sidebar({ connected, headerAlert, ...props }) {
   const router = useRouter()
@@ -15,17 +16,16 @@ export default function Sidebar({ connected, headerAlert, ...props }) {
   const [loading, setLoading] = useState(false)
 
   const getPrice = async () => {
-    await fetch('https://api.pancakeswap.info/api/v2/tokens/' + '0xc6f82B6922Ad6484c69BBE5f0c52751cE7F15EF2')
-      .then(response => response.json())
-      .then((data) => {
-        setPrice(data.data.price)
-        setLoading(false)
-      }
-      )
+    const options = {
+      address: "0xc6f82B6922Ad6484c69BBE5f0c52751cE7F15EF2",
+      chain: "bsc",
+      exchange: "PancakeSwapv2"
+    };
+    const price = await Moralis.Web3API.token.getTokenPrice(options)
+    setPrice(price.usdPrice)
   }
 
   useEffect(() => {
-    setLoading(true)
     const interval_id = setInterval(getPrice, 10000);
     return () => {
       clearInterval(interval_id)
