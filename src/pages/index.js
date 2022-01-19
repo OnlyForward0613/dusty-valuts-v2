@@ -144,7 +144,7 @@ export default function Home({ headerAlert, closeAlert }) {
         reward: nftDump.reward,
         timestamp: nftDump.stakedTime.toString(),
       })
-      nftDump.action === 1 ? usCnt++ : sCnt++
+      nftDump.action === 1 ? sCnt++ : usCnt++
       rewords = rewords + parseFloat(ethers.utils.formatEther(nftDump.reward))
     }
 
