@@ -91,7 +91,7 @@ export default function NFTLIST({
       signer
     )
     stakedNfts = []
-    const userNFTs = await Moralis.Web3API.account.getNFTs({ chain: 'bsc testnet', address: accounts[0] })
+    const userNFTs = await Moralis.Web3API.account.getNFTs({ chain: 'bsc', address: accounts[0] })
     const nftTransfers = await getNFTsTransfers()
     if (userNFTs.total !== 0) {
       startLoading()
