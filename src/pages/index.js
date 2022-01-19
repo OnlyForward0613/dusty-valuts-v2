@@ -174,7 +174,6 @@ export default function Home({ headerAlert, closeAlert }) {
   }
 
   const autoUnstake = (tokenAddress, tokenId, timeStamp) => {
-    console.log(tokenAddress, tokenId, timeStamp, "ttt")
     setAutoTimestamp(timeStamp)
     setUnderModal(true)
   }

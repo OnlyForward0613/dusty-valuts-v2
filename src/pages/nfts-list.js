@@ -99,7 +99,6 @@ export default function NFTLIST({
         const nftDump = await contract.status(accounts[0], userNFTs.result[i].token_address, userNFTs.result[i].token_id)
         if (nftDump.action === 1) {
           tossingCheck(userNFTs.result[i].token_address, userNFTs.result[i].token_id, nftDump.stakedTime.toString(), nftTransfers)
-          console.log(userNFTs.result[i].token_address, userNFTs.result[i].token_id)
         }
         stakedNfts.push({
           name: userNFTs.result[i].name,
@@ -138,7 +137,6 @@ export default function NFTLIST({
   }
 
   const autoUnstake = (tokenAddress, tokenId, timeStamp) => {
-    console.log(tokenAddress, tokenId, timeStamp, "ttt")
     setAutoTimestamp(timeStamp)
     setUnderModal(true)
   }
