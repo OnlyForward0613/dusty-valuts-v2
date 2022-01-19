@@ -13,15 +13,18 @@ export default function Sidebar({ connected, headerAlert, ...props }) {
   }
   const [price, setPrice] = useState(1)
   const [loading, setLoading] = useState(false)
-
+  let loadingCnt = 0
   const getPrice = async () => {
+    loadingCnt === 0 ? setLoading(true) : setLoading(false)
+    loadingCnt++
     const options = {
       address: "0xc6f82B6922Ad6484c69BBE5f0c52751cE7F15EF2",
       chain: "bsc",
       exchange: "PancakeSwapv2"
     };
     const price = await Moralis.Web3API.token.getTokenPrice(options)
-    setPrice(price.usdPrice)
+    setPrice(price.usdPrice, "price")
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -29,7 +32,6 @@ export default function Sidebar({ connected, headerAlert, ...props }) {
     return () => {
       clearInterval(interval_id)
     }
-    // eslint-disable-next-line
   }, [])
 
   return (
@@ -119,7 +121,7 @@ export default function Sidebar({ connected, headerAlert, ...props }) {
             <h5>$Dusty</h5>
             <p>
               {loading ?
-                <Skeleton width={70} sx={{ bgcolor: '#ffffff20' }} height={40} style={{ marginLeft: "auto", backgroundColor: "ffffff3d" }} />
+                <Skeleton width={70} sx={{ bgcolor: '#ffffff20' }} height={32} style={{ marginLeft: "auto", backgroundColor: "ffffff3d" }} />
                 :
                 <>$ {parseFloat(price).toFixed(3)}</>
               }

@@ -4,6 +4,7 @@ import { ethers, providers } from "ethers"
 import { CHAIN_ID, SITE_ERROR, SMARTCONTRACT_ADDRESS_ERC20 } from "../../config"
 import { errorAlert, errorAlertCenter, successAlert } from "../components/toastGroup"
 import { providerOptions } from './connectWallet'
+import Moralis from 'moralis'
 
 export const importToken = () => {
 
@@ -56,4 +57,13 @@ export const setConnectProvider = async (web3Modal, provider, web3Provider, sign
   web3Provider = new providers.Web3Provider(provider)
   signer = web3Provider.getSigner()
   return web3Modal, provider, web3Provider, signer
+}
+
+
+export const getNFTsTransfers = async () => {
+  const web3 = new Web3(Web3.givenProvider)
+  const accounts = await web3.eth.getAccounts()
+  const options = { chain: "bsc testnet", address: accounts[0] }
+  const transfersNFT = await Moralis.Web3API.account.getNFTTransfers(options)
+  return transfersNFT.result
 }

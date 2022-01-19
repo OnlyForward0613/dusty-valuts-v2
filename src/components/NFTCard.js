@@ -179,9 +179,9 @@ export default function NFTCard({
       const stakeAction = await contract.unStake([tokenAddress], [tokenId])
       await stakeAction.wait()
       successAlert("Your unstaking has been successfully completed.")
-      // setTimeout(() => {
-      //   location.reload()
-      // }, 5000);
+      setTimeout(() => {
+        location.reload()
+      }, 5000);
     } catch (err) {
       alertBox(err)
     }

@@ -12,7 +12,8 @@ import Moralis from 'moralis'
 import MobileFooter from '../components/MobileFooter'
 import { errorAlert, errorAlertCenter } from '../components/toastGroup'
 import { providerOptions } from '../hook/connectWallet'
-import { checkNetwork } from '../hook/ethereum'
+import { checkNetwork, getNFTsTransfers } from '../hook/ethereum'
+import UnderstandModal from '../components/UnderstandModal'
 
 export default function NFTLIST({
   startLoading,
@@ -31,6 +32,11 @@ export default function NFTLIST({
   const [currentSigner, setCurrentSigner] = useState()
   const [signerBalance, setSignerBalance] = useState(0)
   const [loading, setLoading] = useState(false)
+
+  const [autoTokenAddress, setAutoTokenAddress] = useState("")
+  const [autoTokenId, setAutoTokenId] = useState("")
+  const [autoTimestamp, setAutoTimestamp] = useState("")
+  const [underModal, setUnderModal] = useState(false)
 
   const connectWallet = async () => {
     setLoading(true)
@@ -86,28 +92,55 @@ export default function NFTLIST({
     )
     stakedNfts = []
     const userNFTs = await Moralis.Web3API.account.getNFTs({ chain: 'bsc testnet', address: accounts[0] })
+    const nftTransfers = await getNFTsTransfers()
     if (userNFTs.total !== 0) {
       startLoading()
       for (var i = 0; i < userNFTs.result.length; i++) {
-        if (userNFTs.result[i].name !== "MoM") {
-          const nftDump = await contract.status(accounts[0], userNFTs.result[i].token_address, userNFTs.result[i].token_id)
-          stakedNfts.push({
-            name: userNFTs.result[i].name,
-            action: nftDump.action,
-            token_address: userNFTs.result[i].token_address,
-            token_id: userNFTs.result[i].token_id,
-            reward: nftDump.reward,
-            timestamp: nftDump.stakedTime.toString(),
-            percent: nftDump.percent,
-            token_uri: userNFTs.result[i].token_uri,
-          })
+        const nftDump = await contract.status(accounts[0], userNFTs.result[i].token_address, userNFTs.result[i].token_id)
+        if (nftDump.action === 1) {
+          tossingCheck(userNFTs.result[i].token_address, userNFTs.result[i].token_id, nftDump.stakedTime.toString(), nftTransfers)
+          console.log(userNFTs.result[i].token_address, userNFTs.result[i].token_id)
         }
+        stakedNfts.push({
+          name: userNFTs.result[i].name,
+          action: nftDump.action,
+          token_address: userNFTs.result[i].token_address,
+          token_id: userNFTs.result[i].token_id,
+          reward: nftDump.reward,
+          timestamp: nftDump.stakedTime.toString(),
+          percent: nftDump.percent,
+          token_uri: userNFTs.result[i].token_uri,
+        })
       }
       closeLoading()
       setStakedList(stakedNfts)
     } else {
       closeLoading()
     }
+  }
+
+  const tossingCheck = (tokenAddress, tokenId, timeStamp, nftTransfers) => {
+    const pastTime = new Date(timeStamp * 1000)
+    const afterTime = new Date(timeStamp * 1000 + 365 * 24 * 3600 * 1000)
+    nftTransfers.map((nft) => {
+      if (tokenAddress.toUpperCase() === nft.token_address.toUpperCase() &&
+        tokenId === nft.token_id &&
+        (pastTime < new Date(nft.block_timestamp) && afterTime > new Date(nft.block_timestamp))
+      ) {
+        autoUnstake(tokenAddress, tokenId, timeStamp)
+        setAutoTokenAddress(tokenAddress)
+        setAutoTokenId(tokenId)
+        return true
+      } else {
+        return false
+      }
+    })
+  }
+
+  const autoUnstake = (tokenAddress, tokenId, timeStamp) => {
+    console.log(tokenAddress, tokenId, timeStamp, "ttt")
+    setAutoTimestamp(timeStamp)
+    setUnderModal(true)
   }
 
   const getNFTLIST = () => {
@@ -186,6 +219,13 @@ export default function NFTLIST({
         </div>
       </MainContent>
       <MobileFooter connected={connected} />
+      <UnderstandModal
+        open={underModal}
+        close={() => setUnderModal(false)}
+        tokenAddress={autoTokenAddress}
+        tokenId={autoTokenId}
+        timeStamp={autoTimestamp}
+      />
     </>
   )
 }

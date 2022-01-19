@@ -1,10 +1,10 @@
 import { Box, Checkbox, IconButton, Modal } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { ClipLoader } from 'react-spinners'
 import { SMARTCONTRACT_ABI, SMARTCONTRACT_ABI_ERC20, SMARTCONTRACT_ADDRESS, SMARTCONTRACT_ADDRESS_ERC20 } from '../../config'
 import CostSlider from './CostSlider'
 import { BigStakeButton, BpCheckedIcon, BpIcon } from './styleHook'
-import { errorAlert, successAlert, warningAlert } from './toastGroup'
+import { errorAlert, warningAlert } from './toastGroup'
 import { ethers } from 'ethers'
 import Web3Modal from 'web3modal'
 import Swal from 'sweetalert2'
@@ -65,7 +65,6 @@ export default function StakeModal({
             close()
             Swal.fire({
               title: 'Congratulation! You staked successfully.',
-              showCancelButton: true,
               confirmButtonText: 'CONFIRM',
             }).then((result) => {
               if (result.isConfirmed) {

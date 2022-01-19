@@ -389,6 +389,10 @@ body {
   }
 }
 .modal-content {
+  h2 {
+    color: #fff;
+    font-size: 18px;
+  }
   p {
     font-size: 10px;
     color: #88ffb7;
@@ -927,7 +931,7 @@ p.signer-balance {
   left: 0;
   width: 100%;
   background: #00021d;
-  z-index: 999;
+  z-index: 8;
   ul {
     display: flex;
     width: calc(100% - 30px);
@@ -1315,5 +1319,15 @@ p.signer-balance {
   z-index: 99999;
   left: 0;
   top: 0;
-  background: #090e1ad6;
+  background: #090e1af2;
+}
+.site-hine {
+  position: fixed;
+  bottom: 0;
+  padding: 30px;
+  font-size: 12px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 720px;
+  color: #fff;
 }

@@ -67,7 +67,6 @@ export default function MultiStakeModal({
             close()
             Swal.fire({
               title: 'Congratulation! You staked successfully.',
-              showCancelButton: true,
               confirmButtonText: 'CONFIRM',
             }).then((result) => {
               if (result.isConfirmed) {
