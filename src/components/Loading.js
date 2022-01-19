@@ -16,7 +16,7 @@ export default function Loading({ loading, children, ...props }) {
     <div className={loading ? "loading active" : "loading"}>
       <ScaleLoader loading={loading} size={150} color="#f8cf5b" />
       <div className="site-hint">
-        <p>NOTE:</p>
+        <p>HINT:</p>
         {hintText !== "" &&
           <Typist avgTypingDelay={30}>
             <span>{hintText}</span>

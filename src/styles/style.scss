@@ -233,7 +233,7 @@ body {
   img {
     object-fit: cover;
     width: 100%;
-    height: 320px;
+    // height: 320px;
     border-radius: 6px;
   }
   p.name {
@@ -246,11 +246,6 @@ body {
 .nft-card.staked {
   border-color: #ccc;
   box-shadow: -4px -4px 6px red, -4px 4px 6px #5ce133, 4px -4px 6px #72ebeb, 4px 4px 6px #c27381;
-}
-@media (max-width: 1440px) {
-  .nft-card img {
-    height: 240px;
-  }
 }
 .card-action {
   text-align: center;
@@ -510,53 +505,6 @@ h3.empty-text {
   justify-content: center;
   &:hover {
     background-color: #ffffff3f;
-  }
-}
-@media (max-width: 1200px) {
-  .nft-card {
-    width: calc(33% - 20px);
-    margin-right: 10px;
-    margin-left: 10px;
-  }
-}
-@media (max-width: 776px) {
-  .infobox-button {
-    margin-top: 10px;
-  }
-  .more-menu-button {
-    width: 24px;
-    height: 24px;
-  }
-  .modal-cover {
-    flex-direction: column;
-  }
-  .modal-cover-content {
-    width: 100%;
-  }
-  .more-option {
-    right: 5px !important;
-  }
-  .multi-infobox {
-    flex-wrap: wrap;
-  }
-  .header-alert {
-    font-size: 12px;
-    padding: 5px 5px;
-    text-align: left;
-    svg {
-      width: 10px;
-      height: 10px;
-    }
-  }
-  .filter-item button {
-    font-size: 16px;
-    padding: 10px 5px;
-    margin: 0 6px;
-  }
-  .nft-card {
-    width: 100%;
-    margin-right: 0;
-    margin-left: 0;
   }
 }
 
@@ -1008,99 +956,13 @@ p.signer-balance {
   }
 }
 
-@media (max-width: 992px) {
-  .mobile-footer {
-    display: block;
-  }
-  .site-hint {
-    width: 100%;
-    padding: 15px 15px;
-  }
-  .nft-card {
-    width: calc(50% - 20px);
-    margin-right: 10px;
-    margin-left: 10px;
-  }
-  .mobile-nav {
-    display: block;
-  }
-  .nav .connect-button {
-    display: none;
-  }
-  .sidebar {
-    display: none;
-  }
-  .page-content {
-    width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-  }
-}
 .header-logo i {
   display: block;
 }
 .modal-box {
   outline: none;
 }
-@media (max-width: 768px) {
-  .header-logo i {
-    display: none;
-  }
-  .home-row {
-    flex-direction: column;
-    margin: 0;
-  }
-  .signer-balance {
-    span {
-      &:first-child {
-        display: none;
-      }
-    }
-  }
-  .modal-box {
-    top: 0 !important;
-    left: 0 !important;
-    transform: translate(0, 0) !important;
-    width: 100% !important;
-    min-height: 100vh !important;
-    border-radius: 0 !important;
-    height: 100% !important;
-    overflow-y: auto;
-  }
-  .dashboard-item {
-    width: 100%;
-    margin-right: 0 !important;
-    margin-left: 0 !important;
-    margin-bottom: 20px;
-  }
-  .modal-image {
-    margin-bottom: 20px;
-    height: auto;
-  }
-  p.signer-balance span:last-child {
-    font-size: 14px;
-  }
-}
 
-@media (max-width: 576px) {
-  .nft-card {
-    width: 100%;
-    margin-right: 0;
-    margin-left: 0;
-  }
-}
-
-@keyframes glowing {
-  0% {
-    background-position: 0 0;
-  }
-  50% {
-    background-position: 400% 0;
-  }
-  100% {
-    background-position: 0 0;
-  }
-}
 .nft-card-active:before {
   content: "";
   background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
@@ -1138,14 +1000,6 @@ p.signer-balance {
   border-radius: 10px;
 }
 
-@keyframes pulse {
-  from {
-    box-shadow: 0 0 hsla(210, 100%, 56%, 0.5);
-  }
-  to {
-    box-shadow: 0 0 0 1em hsla(210, 100%, 56%, 0);
-  }
-}
 .help-modal {
   width: 100%;
   display: flex;
@@ -1240,30 +1094,6 @@ p.signer-balance {
   z-index: 3;
   top: 50%;
   transform: translateY(-50%);
-}
-
-@media (max-width: 576px) {
-  .guide-hero {
-    flex-direction: column;
-  }
-  .guide-item {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  .step-arrow {
-    position: absolute;
-    right: -22px;
-    z-index: 3;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    transform: translateY(-50%);
-    right: auto;
-    left: 50%;
-    transform: translate(-50%, 0) rotate(90deg);
-    bottom: -27px;
-    top: auto;
-  }
 }
 
 .no-mached {
@@ -1365,4 +1195,165 @@ p.signer-balance {
 }
 .check-effect {
   border: 5px solid #fff;
+}
+
+@media (max-width: 1200px) {
+  .nft-card {
+    width: calc(33% - 20px);
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+}
+
+@media (max-width: 992px) {
+  .mobile-footer {
+    display: block;
+  }
+  .site-hint {
+    width: 100%;
+    padding: 15px 15px;
+  }
+  // .nft-card {
+  //   width: calc(50% - 20px);
+  //   margin-right: 10px;
+  //   margin-left: 10px;
+  // }
+  .mobile-nav {
+    display: block;
+  }
+  .nav .connect-button {
+    display: none;
+  }
+  .sidebar {
+    display: none;
+  }
+  .page-content {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-logo i {
+    display: none;
+  }
+  .home-row {
+    flex-direction: column;
+    margin: 0;
+  }
+  .signer-balance {
+    span {
+      &:first-child {
+        display: none;
+      }
+    }
+  }
+  .modal-box {
+    top: 0 !important;
+    left: 0 !important;
+    transform: translate(0, 0) !important;
+    width: 100% !important;
+    min-height: 100vh !important;
+    border-radius: 0 !important;
+    height: 100% !important;
+    overflow-y: auto;
+  }
+  .dashboard-item {
+    width: 100%;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    margin-bottom: 20px;
+  }
+  .modal-image {
+    margin-bottom: 20px;
+    height: auto;
+  }
+  p.signer-balance span:last-child {
+    font-size: 14px;
+  }
+  .infobox-button {
+    margin-top: 10px;
+  }
+  .more-menu-button {
+    width: 24px;
+    height: 24px;
+  }
+  .modal-cover {
+    flex-direction: column;
+  }
+  .modal-cover-content {
+    width: 100%;
+  }
+  .more-option {
+    right: 15px !important;
+    top: 5px;
+  }
+  .multi-infobox {
+    flex-wrap: wrap;
+  }
+  .header-alert {
+    font-size: 12px;
+    padding: 5px 5px;
+    text-align: left;
+    svg {
+      width: 10px;
+      height: 10px;
+    }
+  }
+  .filter-item button {
+    font-size: 16px;
+    padding: 10px 5px;
+    margin: 0 6px;
+  }
+  .nft-card {
+    width: calc(50% - 10px);
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+}
+
+@media (max-width: 576px) {
+  .guide-hero {
+    flex-direction: column;
+  }
+  .guide-item {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .step-arrow {
+    position: absolute;
+    right: -22px;
+    z-index: 3;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    transform: translateY(-50%);
+    right: auto;
+    left: 50%;
+    transform: translate(-50%, 0) rotate(90deg);
+    bottom: -27px;
+    top: auto;
+  }
+}
+
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+@keyframes pulse {
+  from {
+    box-shadow: 0 0 hsla(210, 100%, 56%, 0.5);
+  }
+  to {
+    box-shadow: 0 0 0 1em hsla(210, 100%, 56%, 0);
+  }
 }

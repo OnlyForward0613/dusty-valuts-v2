@@ -17,7 +17,7 @@ export default function MapPageLoading({ loading, ...props }) {
     <div className="map-loading">
       <ScaleLoader loading={loading} size={150} color="#f8cf5b" />
       <div className="site-hint">
-        <p>NOTE:</p>
+        <p>HINT:</p>
         {hintText !== "" &&
           <Typist avgTypingDelay={30}>
             <span>{hintText}</span>
