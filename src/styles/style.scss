@@ -12,6 +12,10 @@ $gold-color: #fad657;
 .gold-color {
   color: $gold-color;
 }
+.swal2-container.swal2-backdrop-show,
+.swal2-container.swal2-noanimation {
+  background: rgba(0, 0, 0, 0) !important;
+}
 .swal2-title {
   font-size: 18px !important;
   padding-top: 20px !important;
@@ -29,27 +33,6 @@ button {
   justify-content: center;
   flex-direction: column;
 }
-.loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  z-index: 99;
-  position: fixed;
-  background: #121827;
-  width: 100%;
-  left: 0;
-  top: 0;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-.loading.active {
-  opacity: 1;
-  pointer-events: all;
-  transition: opacity 0.2s;
-}
-
 header {
   position: fixed;
   background-color: #00021d;
@@ -607,6 +590,7 @@ h3.empty-text {
 .map-page {
   padding: 0px 15px 100px;
   margin-top: 60px;
+  overflow: hidden;
 }
 .homebanner {
   padding: 100px 10px 30px;
@@ -793,6 +777,75 @@ h3.empty-text {
     }
   }
 }
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  z-index: 99;
+  position: fixed;
+  background: #121827;
+  width: 100%;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.loading.active {
+  opacity: 1;
+  pointer-events: all;
+  transition: opacity 0.2s;
+}
+
+.map-loading {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  left: 0;
+  top: 0;
+  background: #090e1af2;
+}
+.swal2-container {
+  background: #00000000;
+}
+.swal2-container.swal2-center > .swal2-popup {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: center;
+  justify-self: center;
+  box-shadow: 0 0 50px #000;
+  background: #333;
+}
+.swal2-title {
+  color: #fff !important;
+}
+.swal2-styled.swal2-confirm {
+  border: 0;
+  border-radius: 30px;
+  background: initial;
+  background-color: #1e88e5;
+  color: #fff;
+  font-size: 1em;
+  padding: 10px 25px;
+  letter-spacing: 2px;
+}
+.site-hint {
+  position: fixed;
+  bottom: 0;
+  padding: 15px 30px;
+  font-size: 12px;
+  width: 720px;
+  color: #fff;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
 p.signer-balance {
   color: #fff;
   font-weight: 700;
@@ -958,6 +1011,10 @@ p.signer-balance {
 @media (max-width: 992px) {
   .mobile-footer {
     display: block;
+  }
+  .site-hint {
+    width: 100%;
+    padding: 15px 15px;
   }
   .nft-card {
     width: calc(50% - 20px);
@@ -1308,26 +1365,4 @@ p.signer-balance {
 }
 .check-effect {
   border: 5px solid #fff;
-}
-.map-loading {
-  position: fixed;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 99999;
-  left: 0;
-  top: 0;
-  background: #090e1af2;
-}
-.site-hine {
-  position: fixed;
-  bottom: 0;
-  padding: 30px;
-  font-size: 12px;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 720px;
-  color: #fff;
 }

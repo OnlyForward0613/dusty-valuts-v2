@@ -170,10 +170,10 @@ export default function NFTMap({
 
   const openStakeModal = () => {
     setModal(true)
-    setHide(!hide)
   }
 
   const openUnstake = () => {
+    setHide(!hide)
     Swal.fire({
       title: 'Do you really want to remove this NFT from the vault? You will lose all $Dusty associated with it',
       confirmButtonText: 'Unstake',

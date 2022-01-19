@@ -1,22 +1,28 @@
 import { useEffect, useState } from "react"
 import ScaleLoader from "react-spinners/ScaleLoader"
 import { HINT } from "../../config"
+import Typist from "react-typist"
 
 export default function Loading({ loading, children, ...props }) {
-  const [hintText, setHintText] = useState([])
-  useEffect(() => {
+  const [hintText, setHintText] = useState("")
+  const setText = () => {
     const random = Math.floor(Math.random() * HINT.length)
-    const sentence = HINT[random].split("@@")
-    setHintText(sentence)
+    setHintText(HINT[random])
+  }
+  useEffect(() => {
+    setText()
   }, [])
   return (
-    <div className={true ? "loading active" : "loading"}>
-      <ScaleLoader loading={true} size={150} color="#f8cf5b" />
-      <div className="site-hine">
-        {hintText.map((item, key) => (
-          <p key={key}>{item}</p>
-        ))}
+    <div className={loading ? "loading active" : "loading"}>
+      <ScaleLoader loading={loading} size={150} color="#f8cf5b" />
+      <div className="site-hint">
+        <p>NOTE:</p>
+        {hintText !== "" &&
+          <Typist avgTypingDelay={30}>
+            <span>{hintText}</span>
+          </Typist>
+        }
       </div>
-    </div>
+    </div >
   )
 }

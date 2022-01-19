@@ -1052,27 +1052,27 @@ export const SITE_ERROR = [
 ]
 
 export const HINT = [
-    "We are a safe, boring NFT vault.  That is very $Dusty.  You can pay us to store your NFT’s for the next year.  We’re going to lock them in an old vault and keep a watchful eye on them.  Like anything put in storage it will get $Dusty over time.",
+    "We are a safe, boring NFT vault. That is very $Dusty. You can pay us to store your NFT’s for the next year. We’re going to lock them in an old vault and keep a watchful eye on them. Like anything put in storage it will get $Dusty over time.",
 
-    "In fact at the end of 12 months you can withdraw your NFT, plus your original funds, plus all your accumulated $Dusty tokens. @@1 - Connect your wallet@@2 - Ensure you’re on the right network@@3 - Make sure you have some $Dusty tokens in your wallet@@4 - Select the NFT’s in your wallet that you want to store@@5 - Select how much you want to pay / receive (the more you pay for storage, the more $Dusty you receive)@@6 - Set & forget.  They’re in storage now, leave them alone and come back in a year.",
+    "In fact at the end of 12 months you can withdraw your NFT, plus your original funds, plus all your accumulated $Dusty tokens. 1 - Connect your wallet. 2 - Ensure you’re on the right network. 3 - Make sure you have some $Dusty tokens in your wallet. 4 - Select the NFT’s in your wallet that you want to store 5 - Select how much you want to pay / receive (the more you pay for storage, the more $Dusty you receive) 6 - Set & forget. They’re in storage now, leave them alone and come back in a year.",
 
-    "Up to you, the more you spend on storage the more $Dusty tokens you will receive in 12 months time.  The least is 10%, the maximum is 50% but the price of $Dusty will also impact your earnings.",
+    "Up to you, the more you spend on storage the more $Dusty tokens you will receive in 12 months time. The least is 10%, the maximum is 50% but the price of $Dusty will also impact your earnings.",
 
-    "The team behind this are successful in their own right in other projects and don’t want this project to detract from their day jobs.  It’s also a pretty simple, and very boring, project. We don’t have a convoluted road map, we’re not going to gamify this, there are no plans to make a MetaStorage worldscape you can tour in VR.",
+    "The team behind this are successful in their own right in other projects and don’t want this project to detract from their day jobs. It’s also a pretty simple, and very boring, project. We don’t have a convoluted road map, we’re not going to gamify this, there are no plans to make a MetaStorage worldscape you can tour in VR.",
 
-    "It’s just boring.  And at this point there is no desire to build out a massive team and try and take on the world.@@This project came about to solve a problem that they had. I.e. they found themselves holding dozens of very cool NFT’s that were basically worthless until the the market for that project bounced back.",
+    "It’s just boring. And at this point there is no desire to build out a massive team and try and take on the world. This project came about to solve a problem that they had. I.e. they found themselves holding dozens of very cool NFT’s that were basically worthless until the the market for that project bounced back.",
 
-    "Storage Owner:  Successful entrepreneur, saw an opportunity to solve a problem he faced (and possibly aped into too many NFT projects that dissolved before his eyes).@@Storage Builder: The most sought after Dev in Web3. Works quickly and effectively, starts with security, works backwards to frontend.",
+    "Storage Owner:  Successful entrepreneur, saw an opportunity to solve a problem he faced (and possibly aped into too many NFT projects that dissolved before his eyes). Storage Builder: The most sought after Dev in Web3. Works quickly and effectively, starts with security, works backwards to frontend.",
 
-    "Storage Treasurer: Uses your funds to stake, hedge, leverage, trade, hustle and invest to get enviable returns.@@Community Manager: Doesn’t exist.  We’re a dusty vault.  You store stuff with us.  It gets $Dusty.@@Not everything needs a community manager to rub your belly and reassure you every time you ask the same question.",
+    "Storage Treasurer: Uses your funds to stake, hedge, leverage, trade, hustle and invest to get enviable returns. Community Manager: Doesn’t exist. We’re a dusty vault. You store stuff with us. It gets $Dusty. Not everything needs a community manager to rub your belly and reassure you every time you ask the same question.",
 
-    "Is there a white paper?@@You’re reading it.",
+    "Is there a white paper? You’re reading it.",
 
-    "Why do I have to give 3 separate permissions every time I store an NFT?@@This is for your security and the security of your NFT.  However, we are looking to change it in the future so you only need one.",
+    "Why do I have to give 3 separate permissions every time I store an NFT? This is for your security and the security of your NFT. However, we are looking to change it in the future so you only need one.",
 
-    "Can I select multiple NFT’s to save at one time?@@Unfortunately that functionality is not yet available but will be coming in the next version.",
+    "Can I select multiple NFT’s to save at one time? Unfortunately that functionality is not yet available but will be coming in the next version.",
 
-    "I can only see a black box where my NFT should be?@@This happens with certain NFT’s.  We are looking to fix it, but it does not impact your ability to store it safely and earn $Dusty on it.",
+    "I can only see a black box where my NFT should be? This happens with certain NFT’s. We are looking to fix it, but it does not impact your ability to store it safely and earn $Dusty on it.",
 
-    "What happens at the end of 12 months?@@The vault will automatically send your NFT & your $Dusty to your wallet.  You are then free to restake it or sell it for millions!"
+    "What happens at the end of 12 months? The vault will automatically send your NFT & your $Dusty to your wallet. You are then free to restake it or sell it for millions!"
 ]

@@ -5,6 +5,7 @@ import { CHAIN_ID, SITE_ERROR, SMARTCONTRACT_ADDRESS_ERC20 } from "../../config"
 import { errorAlert, errorAlertCenter, successAlert } from "../components/toastGroup"
 import { providerOptions } from './connectWallet'
 import Moralis from 'moralis'
+import confetti from 'canvas-confetti'
 
 export const importToken = () => {
 
@@ -66,4 +67,13 @@ export const getNFTsTransfers = async () => {
   const options = { chain: "bsc testnet", address: accounts[0] }
   const transfersNFT = await Moralis.Web3API.account.getNFTTransfers(options)
   return transfersNFT.result
+}
+
+
+export const showConfetti = () => {
+  confetti({
+    particleCount: 300,
+    spread: 330,
+    origin: { y: 0.5 }
+  });
 }

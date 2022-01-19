@@ -8,6 +8,7 @@ import { errorAlert, warningAlert } from './toastGroup'
 import { ethers } from 'ethers'
 import Web3Modal from 'web3modal'
 import Swal from 'sweetalert2'
+import { showConfetti } from '../hook/ethereum'
 
 export default function StakeModal({
   open,
@@ -63,8 +64,10 @@ export default function StakeModal({
             const stakeAction = await contract.stakeByHash([tokenAddress], [tokenId], isr.toLocaleString('fullwide', { useGrouping: false }))
             await stakeAction.wait()
             close()
+            showConfetti()
             Swal.fire({
               title: 'Congratulation! You staked successfully.',
+              allowOutsideClick: false,
               confirmButtonText: 'CONFIRM',
             }).then((result) => {
               if (result.isConfirmed) {
