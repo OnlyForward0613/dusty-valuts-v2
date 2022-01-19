@@ -32,6 +32,7 @@ export default function Sidebar({ connected, headerAlert, ...props }) {
     return () => {
       clearInterval(interval_id)
     }
+    // eslint-disable-next-line
   }, [])
 
   return (
