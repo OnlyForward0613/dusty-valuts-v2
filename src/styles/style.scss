@@ -474,15 +474,19 @@ input.reward-input {
     }
   }
 }
-h3.empty-text {
-  text-align: center;
+.empty-text {
   width: 100%;
-  padding: 20px 0;
-  color: #fff;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 200px);
+  flex-direction: column;
+  min-height: calc(100vh - 320px);
+  p {
+    font-size: 18px;
+    color: #ffffff36;
+    font-weight: bold;
+  }
 }
 .filter-item.active button {
   color: #fff;
@@ -1234,6 +1238,9 @@ p.signer-balance {
 }
 
 @media (max-width: 768px) {
+  .empty-text p {
+    font-size: 14px;
+  }
   .header-logo i {
     display: none;
   }

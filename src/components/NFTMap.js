@@ -12,6 +12,7 @@ import { ethers } from 'ethers'
 import { SMARTCONTRACT_ABI, SMARTCONTRACT_ADDRESS } from '../../config'
 import MapPageLoading from '../components/MapPageLoading'
 import Swal from 'sweetalert2'
+import { ReactSVG } from 'react-svg'
 
 export default function NFTMap({
   groupNFT,
@@ -314,10 +315,13 @@ export default function NFTMap({
               setCheckedCardByHash(hash, image)}
           />
         ))}
-        {(stakedList.lenth + stakedList.length) === 0 &&
-          <h3 className="empty-text">
-            You don&apos;t have any NFTs on this Wallet
-          </h3>
+        {renderArray.length === 0 &&
+          <div className="empty-text">
+            <ReactSVG
+              src="./empty-wallet.svg"
+            />
+            <p>You don&apos;t have any NFTs on this Wallet</p>
+          </div>
         }
       </div>
       <MultiStakeModal
