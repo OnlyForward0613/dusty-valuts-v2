@@ -64,7 +64,7 @@ export const setConnectProvider = async (web3Modal, provider, web3Provider, sign
 export const getNFTsTransfers = async () => {
   const web3 = new Web3(Web3.givenProvider)
   const accounts = await web3.eth.getAccounts()
-  const options = { chain: "bsc", address: accounts[0] }
+  const options = { chain: "bsc testnet", address: accounts[0] }
   const transfersNFT = await Moralis.Web3API.account.getNFTTransfers(options)
   return transfersNFT.result
 }

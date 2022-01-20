@@ -128,7 +128,7 @@ export default function Home({ headerAlert, closeAlert }) {
     let sCnt = 0
     let usCnt = 0
     let rewords = 0
-    const userNFTs = await Moralis.Web3API.account.getNFTs({ chain: 'bsc', address: accounts[0] })
+    const userNFTs = await Moralis.Web3API.account.getNFTs({ chain: 'bsc testnet', address: accounts[0] })
 
     const nftTransfers = await getNFTsTransfers()
 

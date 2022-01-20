@@ -113,8 +113,8 @@ export default function FAQ({ headerAlert, closeAlert }) {
           </Head>
           <Container>
             <div className="section-title" style={{ paddingTop: !headerAlert ? 35 : 60 }}>
-              <h1>Frequently asked questions</h1>
-              <p>If the answer to your question isn&apos;t here then ask it on <a href="https://twitter.com/DustyVaultsNFT" target="_blank" rel="noreferrer">Twitter</a>, we&apos;ll answer it and add it.</p>
+              <h1 style={{ textTransform: "capitalize" }}>Frequently asked questions</h1>
+              <p>If the answer to your question isn&apos;t here then please ask it in our <a href="https://t.me/DustyVaults" target="_blank" rel="noreferrer">Telegram  Group</a> and we&apos;ll do our best to answer</p>
               <p>Store your NFT&apos;s in our vaults and they will get $Dusty</p>
             </div>
             <div className="faq-content">
@@ -195,12 +195,16 @@ const questions = [
     answer: "We are a safe, boring NFT vault.  That is very $Dusty.  You can pay us to store your NFT’s for the next year.  We’re going to lock them in an old vault and keep a watchful eye on them.  Like anything put in storage it will get $Dusty over time.  In fact at the end of 12 months you can withdraw your NFT, plus your original funds, plus all your accumulated $Dusty tokens. @@1 - Connect your wallet@@2 - Ensure you’re on the right network@@3 - Make sure you have some $Dusty tokens in your wallet@@4 - Select the NFT’s in your wallet that you want to store@@5 - Select how much you want to pay / receive (the more you pay for storage, the more $Dusty you receive)@@6 - Set & forget.  They’re in storage now, leave them alone and come back in a year.@@"
   },
   {
+    question: "Do I have to transfer ownership of my NFT’s to DustyVaults?",
+    answer: "No, they remain in your wallet the whole time.  When you ‘store’ your NFT’s with us, we make a record of your wallet address.  At the end of 12 months, when we send you all the $Dusty you have earned, or airdrop you any bonuses throughout the year, we check your wallet.  If the NFT is still there you will receive them.  If you have sold it or transferred it to another wallet you are no longer eligible."
+  },
+  {
     question: "How much will I make?",
-    answer: "Up to you, the more you spend on storage the more $Dusty tokens you will receive in 12 months time.  The least is 10%, the maximum is 50% but the price of $Dusty will also impact your earnings."
+    answer: "Up to you, the more you spend on storage the more $Dusty tokens you will receive in 12 months time. The least is 1%, the maximum is 50% but the price of $Dusty will also impact your earnings."
   },
   {
     question: "I can get higher APR’s elsewhere!",
-    answer: "Yes.  Yes, you can.  Off you go.@@At a certain point in every art collectors life you realise 2 things:@@1.	Your art/NFT is worthless as long as it’s sitting in your wallet doing nothing@@2.	Trying to find the best returns in crypto is like playing whack a mole but with less satisfaction and more rugs.  Sometimes it’s nice just to put an asset to work and forget about it for a year."
+    answer: "At a certain point in every art collectors life you realise 2 things:@@1.	Your art/NFT is worthless as long as it’s sitting in your wallet doing nothing@@2.	Trying to find the best returns in crypto is like playing whack a mole but with less satisfaction and more rugs.  Sometimes it’s nice just to put an asset to work and forget about it for a year."
   },
   {
     question: "Can I withdraw my NFT within the 12 months?",
@@ -208,7 +212,7 @@ const questions = [
   },
   {
     question: "What happens to my fees if I withdraw?",
-    answer: "Fortunately for you, we are civic minded.  50% of your fees will go to a bonus wallet to reward diamond hands.  The other 50% will be moved to a charity wallet.  Over the next 30 days your tokens will be liquidated and donated to causes where 100% of the funds are put to use (no ‘admin’ fees).  Results will be updated monthly on our page."
+    answer: "At the end of 12 months, we will send you back your initial $Dusty, plus all the extra $Dusty you have earned, plus any bonuses.  Your $dusty and your NFT are now removed from the vault.  You can either restake it and play again, or you can sell."
   },
   {
     question: "What happens at the end of 12 months?",
@@ -220,7 +224,7 @@ const questions = [
   },
   {
     question: "Will you be doing airdops?",
-    answer: "It is possible you will one day wake up and find your wallet is extra $Dusty… Those that restake their NFT’s for a second year are likely to receive the most."
+    answer: "The plan is to periodically reward people who are still storing NFT’s in our vaults.  We may occasionally send you $Dusty but also our partners, who value diamond handed people like yourself, might also want us to send out some goodies in the form of NFT’s or their own tokens from time to time.  Gotta be in it, to win it!"
   },
   {
     question: "Should I speculate on the $Dusty Token?",
@@ -240,34 +244,34 @@ const questions = [
   },
   {
     question: "Who is behind this project?",
-    answer: "The team behind this are successful in their own right in other projects and don’t want this project to detract from their day jobs.  It’s also a pretty simple, and very boring, project. We don’t have a convoluted road map, we’re not going to gamify this, there are no plans to make a MetaStorage worldscape you can tour in VR.  It’s just boring.  And at this point there is no desire to build out a massive team and try and take on the world.@@This project came about to solve a problem that they had. I.e. they found themselves holding dozens of very cool NFT’s that were basically worthless until the the market for that project bounced back."
+    answer: "Behind the team is a CEO of a successful publicly listed company who will remain anon but is the main advisor.@@Jaye Funk the CEO of DustyVaults is a Singaporean pop singer and artist.@@‘Hucky’ is our based developer in Japan @@Codi is running partnerships with creators from Thailand @@And we have several other members of our community helping out.If you see something you think we could be doing better and want to help, please connect with us on Telegram."
   },
-  {
-    question: "Who is the Team:",
-    answer: "Storage Owner:  Successful entrepreneur, saw an opportunity to solve a problem he faced (and possibly aped into too many NFT projects that dissolved before his eyes).@@Storage Builder: The most sought after Dev in Web3. Works quickly and effectively, starts with security, works backwards to frontend.@@Storage Treasurer: Uses your funds to stake, hedge, leverage, trade, hustle and invest to get enviable returns.@@Community Manager: Doesn’t exist.  We’re a dusty vault.  You store stuff with us.  It gets $Dusty.@@Not everything needs a community manager to rub your belly and reassure you every time you ask the same question."
-  },
+  // {
+  //   question: "Who is the Team:",
+  //   answer: "Storage Owner:  Successful entrepreneur, saw an opportunity to solve a problem he faced (and possibly aped into too many NFT projects that dissolved before his eyes).@@Storage Builder: The most sought after Dev in Web3. Works quickly and effectively, starts with security, works backwards to frontend.@@Storage Treasurer: Uses your funds to stake, hedge, leverage, trade, hustle and invest to get enviable returns.@@Community Manager: Doesn’t exist.  We’re a dusty vault.  You store stuff with us.  It gets $Dusty.@@Not everything needs a community manager to rub your belly and reassure you every time you ask the same question."
+  // },
   {
     question: "Is there a white paper?",
     answer: "You’re reading it."
   },
-  {
-    question: "Why do I have to give 3 separate permissions every time I store an NFT?",
-    answer: "This is for your security and the security of your NFT.  However, we are looking to change it in the future so you only need one."
-  },
-  {
-    question: "Can I select multiple NFT’s to save at one time?",
-    answer: "Unfortunately that functionality is not yet available but will be coming in the next version."
-  },
+  // {
+  //   question: "Why do I have to give 3 separate permissions every time I store an NFT?",
+  //   answer: "This is for your security and the security of your NFT.  However, we are looking to change it in the future so you only need one."
+  // },
+  // {
+  //   question: "Can I select multiple NFT’s to save at one time?",
+  //   answer: "Unfortunately that functionality is not yet available but will be coming in the next version."
+  // },
   {
     question: "I can only see a black box where my NFT should be?",
     answer: "This happens with certain NFT’s.  We are looking to fix it, but it does not impact your ability to store it safely and earn $Dusty on it."
   },
-  {
-    question: "What happens at the end of 12 months?",
-    answer: "The vault will automatically send your NFT & your $Dusty to your wallet.  You are then free to restake it or sell it for millions!"
-  },
-  {
-    question: "I can't get to the site on my mobile MetaMask browser?",
-    answer: "Try going to this link instead: https://dusty-vaults.vercel.app/"
-  }
+  // {
+  //   question: "What happens at the end of 12 months?",
+  //   answer: "The vault will automatically send your NFT & your $Dusty to your wallet.  You are then free to restake it or sell it for millions!"
+  // },
+  // {
+  //   question: "I can't get to the site on my mobile MetaMask browser?",
+  //   answer: "Try going to this link instead: https://dusty-vaults.vercel.app/"
+  // }
 ]

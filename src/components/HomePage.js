@@ -23,7 +23,7 @@ export default function HomePage({
     <div className="full-page">
       <div className="homebanner">
         <h1><i>Dusty Vaults</i></h1>
-        <p>Safely deposit your NFT&apos;s in our secure vault for the next 12 months and earn up to 50% per annum in $Dusty.  It&apos;s time for your NFT&apos;s to pay you back!</p>
+        <p>Deposit your NFT&apos;s in our secure vault for the next 12 months and earn up to 50% per annum + be eligible for NFT airdrops &amp; prizes. It&apos;s time for your NFT&apos;s to start earning for you!</p>
         {/* eslint-disable-next-line */}
         <img
           src="./safe.png"

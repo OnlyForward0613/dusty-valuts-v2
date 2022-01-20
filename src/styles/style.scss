@@ -481,9 +481,9 @@ input.reward-input {
   justify-content: center;
   flex-direction: column;
   min-height: calc(100vh - 320px);
+  color: #ffffff36;
   p {
     font-size: 18px;
-    color: #ffffff36;
     font-weight: bold;
   }
 }
@@ -893,7 +893,10 @@ p.signer-balance {
     line-height: 1.5;
   }
   a {
-    color: $primary-color;
+    color: #40b3e0;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 .user-box {

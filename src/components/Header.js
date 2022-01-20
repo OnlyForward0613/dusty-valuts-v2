@@ -123,6 +123,11 @@ export default function Header({
                       <a onClick={() => setOpen(false)}>FAQ</a>
                     </Link>
                   </li>
+                  <li>
+                    <Link href="/partners">
+                      <a onClick={() => setOpen(false)}>PARTNERS</a>
+                    </Link>
+                  </li>
                 </>
               }
             </ul>

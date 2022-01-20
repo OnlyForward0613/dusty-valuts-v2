@@ -309,7 +309,8 @@ export default function NFTMap({
             <ReactSVG
               src="./empty-wallet.svg"
             />
-            <p>You don&apos;t have any NFTs on this Wallet</p>
+            <p>You don&apos;t have any NFT&apos;s in this wallet</p>
+            <h5>(Try hitting refresh if they are not showing up)</h5>
           </div>
         }
       </div>
