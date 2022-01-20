@@ -66,7 +66,7 @@ export default function UnderstandModal({
             <ReactSVG
               src="./withdraw.svg"
             />
-            <h2>You have already withdrawn NFTs from our vault. Therefore, you cannot receive compensation. You need to unstake that NFT.</h2>
+            <h2>Your NFT left your wallet and unfortunately you are no longer eligible for the DustyVaults rewards. You need to unstake that NFT.</h2>
             <div className="modal-action">
               <BigStakeButton onClick={() => autoUnstake()} disabled={loading}>
                 {loading ?

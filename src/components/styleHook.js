@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import { green, red, blueGrey, blue, grey, lightGreen } from '@mui/material/colors';
+import { green, red, blueGrey, blue, grey, deepOrange } from '@mui/material/colors';
 import { styled } from '@mui/system';
 
 export const ConnectButton = styled(Button)(({ theme }) => ({
@@ -332,5 +332,51 @@ export const SidebarButton = styled(Button)(({ theme }) => ({
   justifyContent: "flex-start",
   "& svg": {
     marginRight: 10
+  }
+}));
+
+
+export const MultiStakeButton = styled(Button)(({ theme }) => ({
+  color: "#fff",
+  borderRadius: 0,
+  fontSize: 14,
+  padding: "5px 30px",
+  borderRadius: 4,
+  fontWeight: 700,
+  textTransform: "uppercase",
+  backgroundColor: green[600],
+  position: "relative",
+  fontFamily: "Open Sans",
+  marginRight: 5,
+  zIndex: 2,
+  '&:hover': {
+    backgroundColor: green[700],
+  },
+  '&:disabled': {
+    color: "#fff",
+    backgroundColor: green[900],
+  }
+}));
+
+
+export const MultiUnstakeButton = styled(Button)(({ theme }) => ({
+  color: "#fff",
+  borderRadius: 0,
+  fontSize: 14,
+  padding: "5px 30px",
+  borderRadius: 4,
+  fontWeight: 700,
+  textTransform: "uppercase",
+  backgroundColor: deepOrange[600],
+  position: "relative",
+  fontFamily: "Open Sans",
+  marginLeft: 5,
+  zIndex: 2,
+  '&:hover': {
+    backgroundColor: deepOrange[700],
+  },
+  '&:disabled': {
+    color: "#fff",
+    backgroundColor: deepOrange[900],
   }
 }));

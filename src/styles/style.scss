@@ -453,7 +453,6 @@ input.reward-input {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px 15px;
 }
 .filter-item button {
   margin: 0 10px;
@@ -1199,7 +1198,12 @@ p.signer-balance {
 .check-effect {
   border: 4px solid #fff;
 }
-
+.sub-controller {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+}
 @media (max-width: 1200px) {
   .nft-card {
     width: calc(33% - 20px);
@@ -1238,6 +1242,9 @@ p.signer-balance {
 }
 
 @media (max-width: 768px) {
+  .sub-controller {
+    flex-direction: column;
+  }
   .empty-text p {
     font-size: 14px;
   }

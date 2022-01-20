@@ -4,7 +4,7 @@ import ItemFilter from './ItemFilter'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import { ButtonGroup } from '@mui/material'
 import ClickAwayListener from '@mui/material/ClickAwayListener'
-import { DoActionButton, MoreMenuButton, CancelButton, OptionButton, UnstakeButton } from './styleHook'
+import { DoActionButton, MoreMenuButton, CancelButton, OptionButton, UnstakeButton, MultiStakeButton, MultiUnstakeButton } from './styleHook'
 import MultiStakeModal from './MultiStakeModal'
 import { errorAlert, successAlert, warningAlert } from './toastGroup'
 import Web3Modal from 'web3modal'
@@ -243,32 +243,21 @@ export default function NFTMap({
 
   return (
     <div className="map-page" style={{ paddingTop: !headerAlert ? 5 : 30 }}>
-      <ClickAwayListener onClickAway={() => setMore(false)}>
-        <div className="more-option" style={{ paddingTop: !headerAlert ? 90 : 115 }}>
-          <button className="more-menu-button" onClick={() => setMore(!more)}>
-            <MoreVertIcon style={{ color: "#fff" }} />
-          </button>
-          {more &&
-            <div className="more-menu">
-              <div className="more-menu-item">
-                <MoreMenuButton fullWidth onClick={() => setMultiAbleState(1)}>Multi Stake</MoreMenuButton>
-              </div>
-              <div className="more-menu-item">
-                <MoreMenuButton fullWidth onClick={() => setMultiAbleState(2)}>Multi Unstake</MoreMenuButton>
-              </div>
-            </div>
-          }
+      <div className="sub-controller">
+        <ItemFilter
+          filterState={filterState}
+          setFilterState={(e) => setFilterState(e)}
+          checkAble={checkAble}
+          setCheckAble={(e) => setCheckAble(e)}
+          all={unstaked + staked}
+          unstaked={unstaked}
+          staked={staked}
+        />
+        <div className="multi-actions">
+          <MultiStakeButton onClick={() => setMultiAbleState(1)} disabled={multiStakeAble}>Multi Stake</MultiStakeButton>
+          <MultiUnstakeButton onClick={() => setMultiAbleState(2)} disabled={multiUnstakeAble}>Multi unstake</MultiUnstakeButton>
         </div>
-      </ClickAwayListener>
-      <ItemFilter
-        filterState={filterState}
-        setFilterState={(e) => setFilterState(e)}
-        checkAble={checkAble}
-        setCheckAble={(e) => setCheckAble(e)}
-        all={unstaked + staked}
-        unstaked={unstaked}
-        staked={staked}
-      />
+      </div>
       {checkAble &&
         <div className="multi-infobox" style={{ top: !headerAlert ? 67 : 97 }}>
           <p><span>{selectCount}</span>Selected</p>
