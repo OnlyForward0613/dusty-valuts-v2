@@ -16,8 +16,8 @@ export default function Loading({ loading, children, ...props }) {
     // eslint-disable-next-line
   }, [])
   return (
-    <div className={true ? "loading active" : "loading"}>
-      <ScaleLoader loading={true} size={150} color="#f8cf5b" />
+    <div className={loading ? "loading active" : "loading"}>
+      <ScaleLoader loading={loading} size={150} color="#f8cf5b" />
       <div className="site-hint">
         <p>HINT:</p>
         <h5 style={{ fontSize: 14 }}>{title}</h5>
