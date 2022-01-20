@@ -148,6 +148,7 @@ export default function NFTLIST({
   }
 
   useEffect(() => {
+    closeLoading()
     async function fetchData() {
       if (typeof window.ethereum !== 'undefined') {
         if (await checkNetwork("no-alert")) {

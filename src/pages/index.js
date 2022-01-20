@@ -17,7 +17,7 @@ import UnderstandModal from '../components/UnderstandModal'
 
 let web3Modal = undefined
 
-export default function Home({ headerAlert, closeAlert }) {
+export default function Home({ headerAlert, closeAlert, closeLoading }) {
 
   const [totalReward, setTotalReward] = useState(0)
   const [loading, setLoading] = useState(false)
@@ -179,6 +179,7 @@ export default function Home({ headerAlert, closeAlert }) {
   }
 
   useEffect(() => {
+    closeLoading()
     async function fetchData() {
       if (typeof window.ethereum !== 'undefined') {
         if (await checkNetwork("no-alert")) {

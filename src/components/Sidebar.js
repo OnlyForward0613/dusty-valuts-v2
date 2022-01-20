@@ -13,10 +13,7 @@ export default function Sidebar({ connected, headerAlert, ...props }) {
   }
   const [price, setPrice] = useState(1)
   const [loading, setLoading] = useState(false)
-  let loadingCnt = 0
   const getPrice = async () => {
-    loadingCnt === 0 ? setLoading(true) : setLoading(false)
-    loadingCnt++
     const options = {
       address: "0xc6f82B6922Ad6484c69BBE5f0c52751cE7F15EF2",
       chain: "bsc",
@@ -28,6 +25,7 @@ export default function Sidebar({ connected, headerAlert, ...props }) {
   }
 
   useEffect(() => {
+    setLoading(true)
     const interval_id = setInterval(getPrice, 10000);
     return () => {
       clearInterval(interval_id)

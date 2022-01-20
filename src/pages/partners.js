@@ -14,13 +14,14 @@ import { Container } from '@mui/material'
 
 let web3Modal = undefined
 
-export default function Partners({ headerAlert, closeAlert }) {
+export default function Partners({ headerAlert, closeAlert, closeLoading }) {
   const [connected, setConnected] = useState(false)
   const [signerAddress, setSignerAddress] = useState("")
   const [signerBalance, setSignerBalance] = useState(0)
   const [loading, setLoading] = useState(false)
 
   const connectWallet = async () => {
+    closeLoading()
     setLoading(true)
     if (await checkNetwork()) {
       web3Modal = new Web3Modal({
@@ -59,6 +60,7 @@ export default function Partners({ headerAlert, closeAlert }) {
   }
 
   useEffect(() => {
+    closeLoading()
     async function fetchData() {
       if (typeof window.ethereum !== 'undefined') {
         if (await checkNetwork()) {
