@@ -740,12 +740,12 @@ input.reward-input {
   top: 0;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.2s;
+  // transition: opacity 0.2s;
 }
 .loading.active {
   opacity: 1;
   pointer-events: all;
-  transition: opacity 0.2s;
+  // transition: opacity 0.2s;
 }
 
 .map-loading {

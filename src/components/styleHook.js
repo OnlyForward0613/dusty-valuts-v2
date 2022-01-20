@@ -103,6 +103,10 @@ export const OptionButton = styled(Button)(({ theme }) => ({
   '&:disabled': {
     color: "#fff",
     backgroundColor: blueGrey[600],
+  },
+  '@media (max-width: 768px)': {
+    fontSize: 12,
+    padding: "5px 15px"
   }
 }));
 
@@ -355,6 +359,10 @@ export const MultiStakeButton = styled(Button)(({ theme }) => ({
   '&:disabled': {
     color: "#fff",
     backgroundColor: green[900],
+  },
+  '@media (max-width: 768px)': {
+    fontSize: 12,
+    padding: "5px 15px"
   }
 }));
 
@@ -378,5 +386,9 @@ export const MultiUnstakeButton = styled(Button)(({ theme }) => ({
   '&:disabled': {
     color: "#fff",
     backgroundColor: deepOrange[900],
+  },
+  '@media (max-width: 768px)': {
+    fontSize: 12,
+    padding: "5px 15px"
   }
 }));
