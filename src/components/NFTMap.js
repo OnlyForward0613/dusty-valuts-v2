@@ -1,18 +1,18 @@
-import { useEffect, useState } from 'react'
-import NFTCard from './NFTCard'
-import ItemFilter from './ItemFilter'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
-import { ButtonGroup } from '@mui/material'
-import ClickAwayListener from '@mui/material/ClickAwayListener'
-import { DoActionButton, MoreMenuButton, CancelButton, OptionButton, UnstakeButton, MultiStakeButton, MultiUnstakeButton } from './styleHook'
-import MultiStakeModal from './MultiStakeModal'
-import { errorAlert, successAlert, warningAlert } from './toastGroup'
-import Web3Modal from 'web3modal'
-import { ethers } from 'ethers'
-import { SMARTCONTRACT_ABI, SMARTCONTRACT_ADDRESS } from '../../config'
-import MapPageLoading from '../components/MapPageLoading'
-import Swal from 'sweetalert2'
-import { ReactSVG } from 'react-svg'
+import { useEffect, useState } from "react"
+import NFTCard from "./NFTCard"
+import ItemFilter from "./ItemFilter"
+import MoreVertIcon from "@mui/icons-material/MoreVert"
+import { ButtonGroup } from "@mui/material"
+import ClickAwayListener from "@mui/material/ClickAwayListener"
+import { DoActionButton, MoreMenuButton, CancelButton, OptionButton, UnstakeButton, MultiStakeButton, MultiUnstakeButton } from "./styleHook"
+import MultiStakeModal from "./MultiStakeModal"
+import { errorAlert, successAlert, warningAlert } from "./toastGroup"
+import Web3Modal from "web3modal"
+import { ethers } from "ethers"
+import { SMARTCONTRACT_ABI, SMARTCONTRACT_ADDRESS } from "../../config"
+import MapPageLoading from "../components/MapPageLoading"
+import Swal from "sweetalert2"
+import { ReactSVG } from "react-svg"
 
 export default function NFTMap({
   groupNFT,
@@ -207,7 +207,7 @@ export default function NFTMap({
         calcelMulti()
         setTimeout(() => {
           location.reload()
-        }, 5000);
+        }, 5000)
       }
     } catch (err) {
       alertBox(err)

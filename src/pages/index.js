@@ -1,19 +1,19 @@
-import { useState, useEffect } from 'react'
-import Head from 'next/head'
-import HomePage from '../components/HomePage'
-import Web3Modal from 'web3modal'
-import Web3 from 'web3'
-import { CHAIN_ID, SITE_ERROR, SMARTCONTRACT_ABI, SMARTCONTRACT_ABI_ERC20, SMARTCONTRACT_ADDRESS, SMARTCONTRACT_ADDRESS_ERC20 } from '../../config'
-import Sidebar from '../components/Sidebar'
-import MainContent from '../components/MainContent'
-import Header from '../components/Header'
-import { ethers, providers } from 'ethers'
-import { errorAlert, errorAlertCenter } from '../components/toastGroup'
-import Moralis from 'moralis'
-import MobileFooter from '../components/MobileFooter'
-import { providerOptions } from '../hook/connectWallet'
-import { checkNetwork, getNFTsTransfers } from '../hook/ethereum'
-import UnderstandModal from '../components/UnderstandModal'
+import { useState, useEffect } from "react"
+import Head from "next/head"
+import HomePage from "../components/HomePage"
+import Web3Modal from "web3modal"
+import Web3 from "web3"
+import { CHAIN_ID, SITE_ERROR, SMARTCONTRACT_ABI, SMARTCONTRACT_ABI_ERC20, SMARTCONTRACT_ADDRESS, SMARTCONTRACT_ADDRESS_ERC20 } from "../../config"
+import Sidebar from "../components/Sidebar"
+import MainContent from "../components/MainContent"
+import Header from "../components/Header"
+import { ethers, providers } from "ethers"
+import { errorAlert, errorAlertCenter } from "../components/toastGroup"
+import Moralis from "moralis"
+import MobileFooter from "../components/MobileFooter"
+import { providerOptions } from "../hook/connectWallet"
+import { checkNetwork, getNFTsTransfers } from "../hook/ethereum"
+import UnderstandModal from "../components/UnderstandModal"
 
 let web3Modal = undefined
 
@@ -98,12 +98,12 @@ export default function Home({ headerAlert, closeAlert, closeLoading }) {
       // Subscribe to accounts change
       provider.on("accountsChanged", (accounts) => {
         setSignerAddress(accounts[0])
-      });
+      })
 
       // Subscribe to chainId change
       provider.on("chainChanged", (chainId) => {
         window.location.reload()
-      });
+      })
     }
   }
 
@@ -206,9 +206,9 @@ export default function Home({ headerAlert, closeAlert, closeLoading }) {
         errorAlertCenter(SITE_ERROR[1])
       }
     }
-    fetchData();
+    fetchData()
     // eslint-disable-next-line
-  }, []);
+  }, [])
 
   return (
     <>

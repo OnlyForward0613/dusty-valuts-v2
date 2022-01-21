@@ -1,14 +1,14 @@
-import { Box, Checkbox, IconButton, Modal } from '@mui/material'
-import { useState } from 'react'
-import { ClipLoader } from 'react-spinners'
-import { SMARTCONTRACT_ABI, SMARTCONTRACT_ABI_ERC20, SMARTCONTRACT_ADDRESS, SMARTCONTRACT_ADDRESS_ERC20 } from '../../config'
-import CostSlider from './CostSlider'
-import { BigStakeButton, BpCheckedIcon, BpIcon } from './styleHook'
-import { errorAlert, warningAlert } from './toastGroup'
-import { ethers } from 'ethers'
-import Web3Modal from 'web3modal'
-import Swal from 'sweetalert2'
-import { showConfetti } from '../hook/ethereum'
+import { Box, Checkbox, IconButton, Modal } from "@mui/material"
+import { useState } from "react"
+import { ClipLoader } from "react-spinners"
+import { SMARTCONTRACT_ABI, SMARTCONTRACT_ABI_ERC20, SMARTCONTRACT_ADDRESS, SMARTCONTRACT_ADDRESS_ERC20 } from "../../config"
+import CostSlider from "./CostSlider"
+import { BigStakeButton, BpCheckedIcon, BpIcon } from "./styleHook"
+import { errorAlert, warningAlert } from "./toastGroup"
+import { ethers } from "ethers"
+import Web3Modal from "web3modal"
+import Swal from "sweetalert2"
+import { showConfetti } from "../hook/ethereum"
 
 export default function StakeModal({
   open,

@@ -1,7 +1,7 @@
-import * as React from 'react'
-import Box from '@mui/material/Box'
-import Slider from '@mui/material/Slider'
-import { styled } from '@mui/material/styles'
+import * as React from "react"
+import Box from "@mui/material/Box"
+import Slider from "@mui/material/Slider"
+import { styled } from "@mui/material/styles"
 
 const marks = [
   {
@@ -111,11 +111,6 @@ export default function CostSlider({
   }
   return (
     <Box>
-      {/* <div className="balence-info">
-        <p className="reward-value">Value:&nbsp;$Dusty&nbsp;<span>{real}</span></p>
-      </div>
-      <p className="reward-value">You can earn&nbsp;$Dusty&nbsp;<span>{(real * steps[step]).toFixed(2) * count}</span> after 12 months.</p>
-      <p className="reward-value">+&nbsp;{(real * steps[step]).toFixed(2)}&nbsp;x&nbsp;{count} = {(real * steps[step]).toFixed(2) * count}</p> */}
       <div className="pretto">
         <PrettoSlider
           defaultValue={1}

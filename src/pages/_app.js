@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import { useState } from "react"
 import '../styles/style.scss'
-import { ToastContainer } from 'react-toastify'
-import Loading from '../components/Loading'
-import Moralis from 'moralis'
-import { APP_ID, SERVER_URL } from '../../config'
+import { ToastContainer } from "react-toastify"
+import Loading from "../components/Loading"
+import Moralis from "moralis"
+import { APP_ID, SERVER_URL } from "../../config"
 
 function MyApp({ Component, pageProps }) {
   const [pageLoading, setPageLoading] = useState(false)

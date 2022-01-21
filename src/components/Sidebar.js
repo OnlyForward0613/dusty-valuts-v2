@@ -1,6 +1,6 @@
-import { Skeleton } from "@mui/material"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/router"
-import { useState, useEffect } from 'react'
+import { Skeleton } from "@mui/material"
 import { PANCAKE_LINK } from "../../config"
 import { importToken } from "../hook/ethereum"
 import { SidebarButton } from "./styleHook"
@@ -18,7 +18,7 @@ export default function Sidebar({ connected, headerAlert, ...props }) {
       address: "0xc6f82B6922Ad6484c69BBE5f0c52751cE7F15EF2",
       chain: "bsc",
       exchange: "PancakeSwapv2"
-    };
+    }
     const price = await Moralis.Web3API.token.getTokenPrice(options)
     setPrice(price.usdPrice, "price")
     setLoading(false)
@@ -26,7 +26,7 @@ export default function Sidebar({ connected, headerAlert, ...props }) {
 
   useEffect(() => {
     setLoading(true)
-    const interval_id = setInterval(getPrice, 10000);
+    const interval_id = setInterval(getPrice, 10000)
     return () => {
       clearInterval(interval_id)
     }

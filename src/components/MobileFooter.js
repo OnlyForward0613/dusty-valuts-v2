@@ -1,6 +1,6 @@
-import Link from 'next/link'
-import { PANCAKE_LINK } from '../../config'
-import { importToken } from '../hook/ethereum'
+import Link from "next/link"
+import { PANCAKE_LINK } from "../../config"
+import { importToken } from "../hook/ethereum"
 
 export default function MobileFooter({ connected, ...props }) {
   return (

@@ -1,8 +1,8 @@
-import { Container } from "@mui/material";
-import { GotoButton } from "./styleHook";
-import { useRouter } from 'next/router'
-import { errorAlert } from "./toastGroup";
-import { useEffect } from "react";
+import { Container } from "@mui/material"
+import { GotoButton } from "./styleHook"
+import { useRouter } from "next/router"
+import { errorAlert } from "./toastGroup"
+import { useEffect } from "react"
 
 export default function HeroBanner({
   connected,

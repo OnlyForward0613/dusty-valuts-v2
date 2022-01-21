@@ -1,6 +1,6 @@
 
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 export const errorAlert = (text) => {
   toast.error(text, {
@@ -11,7 +11,7 @@ export const errorAlert = (text) => {
     pauseOnHover: true,
     draggable: true,
     theme: "colored"
-  });
+  })
 }
 
 export const errorAlertCenter = (text) => {
@@ -23,7 +23,7 @@ export const errorAlertCenter = (text) => {
     pauseOnHover: true,
     draggable: true,
     theme: "colored"
-  });
+  })
 }
 
 export const warningAlert = (text) => {
@@ -35,7 +35,7 @@ export const warningAlert = (text) => {
     pauseOnHover: true,
     draggable: true,
     theme: "colored"
-  });
+  })
 }
 
 export const successAlert = (text, state) => {
@@ -48,7 +48,7 @@ export const successAlert = (text, state) => {
       pauseOnHover: true,
       draggable: true,
       theme: "colored"
-    });
+    })
   } else {
     toast.success(text, {
       position: "top-right",
@@ -58,7 +58,7 @@ export const successAlert = (text, state) => {
       pauseOnHover: true,
       draggable: true,
       theme: "colored"
-    });
+    })
   }
 }
 
@@ -71,5 +71,5 @@ export const infoAlert = (text) => {
     pauseOnHover: true,
     draggable: true,
     theme: "colored"
-  });
+  })
 }

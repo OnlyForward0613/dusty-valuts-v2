@@ -1,11 +1,11 @@
 import Web3 from "web3"
-import Web3Modal from 'web3modal'
+import Web3Modal from "web3modal"
 import { ethers, providers } from "ethers"
 import { CHAIN_ID, SITE_ERROR, SMARTCONTRACT_ADDRESS_ERC20 } from "../../config"
 import { errorAlert, errorAlertCenter, successAlert } from "../components/toastGroup"
-import { providerOptions } from './connectWallet'
-import Moralis from 'moralis'
-import confetti from 'canvas-confetti'
+import { providerOptions } from "./connectWallet"
+import Moralis from "moralis"
+import confetti from "canvas-confetti"
 
 export const importToken = () => {
 
@@ -75,5 +75,5 @@ export const showConfetti = () => {
     particleCount: 300,
     spread: 330,
     origin: { y: 0.5 }
-  });
+  })
 }

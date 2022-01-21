@@ -1,17 +1,17 @@
-import { useState, useEffect } from 'react'
-import { Container, Collapse } from '@mui/material'
-import Head from 'next/head'
-import FAQItem from '../components/FAQItem'
-import Sidebar from '../components/Sidebar'
-import Web3Modal from 'web3modal'
-import MainContent from '../components/MainContent'
-import Header from '../components/Header'
-import { providers, ethers } from 'ethers'
-import { CHAIN_ID, SITE_ERROR, SMARTCONTRACT_ABI_ERC20, SMARTCONTRACT_ADDRESS_ERC20 } from '../../config'
-import { errorAlert, errorAlertCenter } from '../components/toastGroup'
-import MobileFooter from '../components/MobileFooter'
-import { providerOptions } from '../hook/connectWallet'
-import { checkNetwork } from '../hook/ethereum'
+import { useState, useEffect } from "react"
+import { Container, Collapse } from "@mui/material"
+import Head from "next/head"
+import FAQItem from "../components/FAQItem"
+import Sidebar from "../components/Sidebar"
+import Web3Modal from "web3modal"
+import MainContent from "../components/MainContent"
+import Header from "../components/Header"
+import { providers, ethers } from "ethers"
+import { CHAIN_ID, SITE_ERROR, SMARTCONTRACT_ABI_ERC20, SMARTCONTRACT_ADDRESS_ERC20 } from "../../config"
+import { errorAlert, errorAlertCenter } from "../components/toastGroup"
+import MobileFooter from "../components/MobileFooter"
+import { providerOptions } from "../hook/connectWallet"
+import { checkNetwork } from "../hook/ethereum"
 
 let web3Modal = undefined
 
@@ -52,12 +52,12 @@ export default function FAQ({ headerAlert, closeAlert, closeLoading }) {
       // Subscribe to accounts change
       provider.on("accountsChanged", (accounts) => {
         setSignerAddress(accounts[0])
-      });
+      })
 
       // Subscribe to chainId change
       provider.on("chainChanged", (chainId) => {
         window.location.reload()
-      });
+      })
     }
   }
 
@@ -87,9 +87,9 @@ export default function FAQ({ headerAlert, closeAlert, closeLoading }) {
         errorAlertCenter(SITE_ERROR[1])
       }
     }
-    fetchData();
+    fetchData()
     // eslint-disable-next-line
-  }, []);
+  }, [])
 
   return (
     <>

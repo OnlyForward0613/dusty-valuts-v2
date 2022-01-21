@@ -1,8 +1,8 @@
-import { Collapse } from "@mui/material";
-import { useState } from "react";
+import { useState } from "react"
+import { Collapse } from "@mui/material"
 
 export default function FAQItem({ question, answer, ...props }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
   const sentence = answer.split("@@")
   return (
     <div className="faq-item">

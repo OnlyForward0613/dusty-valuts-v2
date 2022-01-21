@@ -1,6 +1,6 @@
-import { Button } from '@mui/material';
-import { green, red, blueGrey, blue, grey, deepOrange } from '@mui/material/colors';
-import { styled } from '@mui/system';
+import { Button } from "@mui/material"
+import { green, red, blueGrey, blue, grey, deepOrange } from "@mui/material/colors"
+import { styled } from "@mui/system"
 
 export const ConnectButton = styled(Button)(({ theme }) => ({
   color: "#fff",
@@ -20,7 +20,7 @@ export const ConnectButton = styled(Button)(({ theme }) => ({
     color: "#fff",
     backgroundColor: blue[600],
   }
-}));
+}))
 
 export const GotoButton = styled(Button)(({ theme }) => ({
   color: "#fff",
@@ -42,7 +42,7 @@ export const GotoButton = styled(Button)(({ theme }) => ({
     color: "#fff",
     backgroundColor: green[600],
   }
-}));
+}))
 export const BigStakeButton = styled(Button)(({ theme }) => ({
   color: "#fff",
   borderRadius: 0,
@@ -62,7 +62,7 @@ export const BigStakeButton = styled(Button)(({ theme }) => ({
     color: "#fff",
     backgroundColor: green[600],
   }
-}));
+}))
 
 export const DoActionButton = styled(Button)(({ theme }) => ({
   color: "#fff",
@@ -83,7 +83,7 @@ export const DoActionButton = styled(Button)(({ theme }) => ({
     color: "#fff",
     backgroundColor: green[600],
   }
-}));
+}))
 
 export const OptionButton = styled(Button)(({ theme }) => ({
   color: "#fff",
@@ -108,7 +108,7 @@ export const OptionButton = styled(Button)(({ theme }) => ({
     fontSize: 12,
     padding: "5px 15px"
   }
-}));
+}))
 
 export const CancelButton = styled(Button)(({ theme }) => ({
   color: "#fff",
@@ -129,7 +129,7 @@ export const CancelButton = styled(Button)(({ theme }) => ({
     color: "#fff",
     backgroundColor: grey[600],
   }
-}));
+}))
 
 export const UnstakeButton = styled(Button)(({ theme }) => ({
   color: "#fff",
@@ -150,7 +150,8 @@ export const UnstakeButton = styled(Button)(({ theme }) => ({
     color: "#fff",
     backgroundColor: red[600],
   }
-}));
+}))
+
 export const ClaimButton = styled(Button)(({ theme }) => ({
   color: "#fff",
   borderRadius: 3,
@@ -171,7 +172,7 @@ export const ClaimButton = styled(Button)(({ theme }) => ({
     color: "#fff",
     backgroundColor: blueGrey[600],
   }
-}));
+}))
 
 export const MenuButton = styled(Button)(({ theme }) => ({
   fontSize: 16,
@@ -181,7 +182,7 @@ export const MenuButton = styled(Button)(({ theme }) => ({
   position: "relative",
   borderBottom: "1px solid #ccc",
   fontFamily: "Open Sans",
-}));
+}))
 
 export const MoreMenuButton = styled(Button)(({ theme }) => ({
   fontSize: 14,
@@ -198,7 +199,7 @@ export const MoreMenuButton = styled(Button)(({ theme }) => ({
   marginTop: 5,
   marginBottom: 5,
   letterSpacing: 0
-}));
+}))
 
 export const ActionButton = styled(Button)(({ theme }) => ({
   color: "#fff",
@@ -231,7 +232,7 @@ export const ActionButton = styled(Button)(({ theme }) => ({
       borderColor: `${pink[800]} !important`,
     }
   }
-}));
+}))
 
 export const BpIcon = styled('span')(({ theme }) => ({
   borderRadius: 3,
@@ -276,7 +277,7 @@ export const BpCheckedIcon = styled(BpIcon)({
   'input:hover ~ &': {
     backgroundColor: '#52af77',
   },
-});
+})
 
 export const MulCheckIcon = styled('span')(({ theme }) => ({
   borderRadius: 0,
@@ -321,7 +322,7 @@ export const MulCheckedIcon = styled(BpIcon)({
   'input:hover ~ &': {
     backgroundColor: '#52af77',
   },
-});
+})
 
 export const SidebarButton = styled(Button)(({ theme }) => ({
   fontSize: 16,
@@ -341,8 +342,7 @@ export const SidebarButton = styled(Button)(({ theme }) => ({
   "& svg": {
     width: "20px !important"
   }
-}));
-
+}))
 
 export const MultiStakeButton = styled(Button)(({ theme }) => ({
   color: "#fff",
@@ -368,8 +368,7 @@ export const MultiStakeButton = styled(Button)(({ theme }) => ({
     fontSize: 12,
     padding: "5px 15px"
   }
-}));
-
+}))
 
 export const MultiUnstakeButton = styled(Button)(({ theme }) => ({
   color: "#fff",
@@ -395,4 +394,4 @@ export const MultiUnstakeButton = styled(Button)(({ theme }) => ({
     fontSize: 12,
     padding: "5px 15px"
   }
-}));
+}))

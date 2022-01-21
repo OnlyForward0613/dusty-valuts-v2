@@ -67,7 +67,7 @@ export default function CardModal({
               close()
               setTimeout(() => {
                 location.reload()
-              }, 5000);
+              }, 5000)
             } catch (err) {
               alertBox(err)
             }

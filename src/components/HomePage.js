@@ -1,6 +1,6 @@
-import { Container, Skeleton } from "@mui/material";
-import { ethers } from "ethers";
-import GuideBanner from "./GuideBanner";
+import { Container, Skeleton } from "@mui/material"
+import { ethers } from "ethers"
+import GuideBanner from "./GuideBanner"
 
 export default function HomePage({
   totalSupply,

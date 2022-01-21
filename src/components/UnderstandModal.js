@@ -1,12 +1,12 @@
-import { Box, Checkbox, IconButton, Modal } from "@mui/material"
+import { Box, Modal } from "@mui/material"
 import { useState } from "react"
 import { ClipLoader } from "react-spinners"
-import { SMARTCONTRACT_ABI, SMARTCONTRACT_ABI_ERC20, SMARTCONTRACT_ADDRESS, SMARTCONTRACT_ADDRESS_ERC20 } from "../../config"
-import { BigStakeButton, BpCheckedIcon, BpIcon } from "./styleHook"
+import { SMARTCONTRACT_ABI, SMARTCONTRACT_ADDRESS } from "../../config"
+import { BigStakeButton } from "./styleHook"
 import { errorAlert, successAlert, warningAlert } from "./toastGroup"
 import Web3Modal from "web3modal"
 import { ethers } from "ethers"
-import { ReactSVG } from 'react-svg'
+import { ReactSVG } from "react-svg"
 
 export default function UnderstandModal({
   open,
@@ -48,7 +48,7 @@ export default function UnderstandModal({
       successAlert("Your unstaking has been successfully completed.")
       setTimeout(() => {
         location.reload()
-      }, 5000);
+      }, 5000)
     } catch (err) {
       alertBox(err)
     }

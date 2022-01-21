@@ -1,4 +1,4 @@
-import WalletConnectProvider from "@walletconnect/web3-provider";
+import WalletConnectProvider from "@walletconnect/web3-provider"
 
 const INFURA_ID = '460f40a260564ac4a4f4b3fffb032dad'
 

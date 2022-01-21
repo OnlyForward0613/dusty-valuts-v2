@@ -1,4 +1,4 @@
-import { ReactSVG } from 'react-svg'
+import { ReactSVG } from "react-svg"
 export default function GuideBanner() {
   return (
     <div className="guide-hero">

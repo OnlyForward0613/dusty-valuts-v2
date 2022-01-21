@@ -1,19 +1,19 @@
-import Head from 'next/head'
-import { useEffect, useState } from 'react'
-import NFTMap from '../components/NFTMap'
+import Head from "next/head"
+import { useEffect, useState } from "react"
+import NFTMap from "../components/NFTMap"
 import Web3Modal from "web3modal"
-import Web3 from 'web3'
-import { CHAIN_ID, SITE_ERROR, SMARTCONTRACT_ABI, SMARTCONTRACT_ABI_ERC20, SMARTCONTRACT_ADDRESS, SMARTCONTRACT_ADDRESS_ERC20 } from '../../config'
-import { ethers, providers } from 'ethers'
-import Sidebar from '../components/Sidebar'
-import MainContent from '../components/MainContent'
-import Header from '../components/Header'
-import Moralis from 'moralis'
-import MobileFooter from '../components/MobileFooter'
-import { errorAlert, errorAlertCenter } from '../components/toastGroup'
-import { providerOptions } from '../hook/connectWallet'
-import { checkNetwork, getNFTsTransfers } from '../hook/ethereum'
-import UnderstandModal from '../components/UnderstandModal'
+import Web3 from "web3"
+import { CHAIN_ID, SITE_ERROR, SMARTCONTRACT_ABI, SMARTCONTRACT_ABI_ERC20, SMARTCONTRACT_ADDRESS, SMARTCONTRACT_ADDRESS_ERC20 } from "../../config"
+import { ethers, providers } from "ethers"
+import Sidebar from "../components/Sidebar"
+import MainContent from "../components/MainContent"
+import Header from "../components/Header"
+import Moralis from "moralis"
+import MobileFooter from "../components/MobileFooter"
+import { errorAlert, errorAlertCenter } from "../components/toastGroup"
+import { providerOptions } from "../hook/connectWallet"
+import { checkNetwork, getNFTsTransfers } from "../hook/ethereum"
+import UnderstandModal from "../components/UnderstandModal"
 
 export default function NFTLIST({
   startLoading,
@@ -65,10 +65,10 @@ export default function NFTLIST({
       setLoading(false)
       provider.on("accountsChanged", (accounts) => {
         setSignerAddress(accounts[0])
-      });
+      })
       provider.on("chainChanged", (chainId) => {
         window.location.reload()
-      });
+      })
     }
   }
 
@@ -174,9 +174,9 @@ export default function NFTLIST({
         errorAlertCenter(SITE_ERROR[1])
       }
     }
-    fetchData();
+    fetchData()
     // eslint-disable-next-line
-  }, []);
+  }, [])
 
   return (
     <>

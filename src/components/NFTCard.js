@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
 import { DoActionButton, UnstakeButton } from "./styleHook"
-import Countdown from 'react-countdown'
+import Countdown from "react-countdown"
 import ClipLoader from "react-spinners/ClipLoader"
-import { errorAlert, successAlert, warningAlert } from './toastGroup'
+import { errorAlert, successAlert, warningAlert } from "./toastGroup"
 import { ethers } from "ethers"
-import { SMARCONTRACT_INI_ABI, SMARTCONTRACT_ABI, SMARTCONTRACT_ABI_ERC20, SMARTCONTRACT_ADDRESS, SMARTCONTRACT_ADDRESS_ERC20 } from "../../config"
-import Swal from 'sweetalert2'
+import { SMARTCONTRACT_ABI, SMARTCONTRACT_ABI_ERC20, SMARTCONTRACT_ADDRESS, SMARTCONTRACT_ADDRESS_ERC20 } from "../../config"
+import Swal from "sweetalert2"
 import Web3Modal from "web3modal"
 import { Skeleton } from "@mui/material"
 import StakeModal from "./StakeModal"
@@ -181,7 +181,7 @@ export default function NFTCard({
       successAlert("Your unstaking has been successfully completed.")
       setTimeout(() => {
         location.reload()
-      }, 5000);
+      }, 5000)
     } catch (err) {
       alertBox(err)
     }
@@ -191,7 +191,7 @@ export default function NFTCard({
   useEffect(() => {
     setTimeout(() => {
       setDetail(data)
-    }, 2000);
+    }, 2000)
     const now = new Date()
     if (action === 1 && new Date(parseInt(stakedTime) * 1000 + 365 * 24 * 3600 * 1000 + 7000) >= now) {
       autoClaim()
