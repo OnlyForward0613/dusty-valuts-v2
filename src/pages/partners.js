@@ -109,7 +109,7 @@ export default function Partners({ headerAlert, closeAlert, closeLoading }) {
         <div className="partner page-content">
           <Head>
             <title>Dusty Vaults | Partners</title>
-            <meta name="description" content="Frequently answered questions" />
+            <meta name="description" content="Check partners of DustyVaults" />
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <Container>
