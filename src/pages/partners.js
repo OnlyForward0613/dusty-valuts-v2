@@ -11,6 +11,7 @@ import MobileFooter from "../components/MobileFooter"
 import { providerOptions } from "../hook/connectWallet"
 import { checkNetwork } from "../hook/ethereum"
 import { Container } from "@mui/material"
+import { ReactSVG } from "react-svg"
 
 let web3Modal = undefined
 
@@ -105,7 +106,7 @@ export default function Partners({ headerAlert, closeAlert, closeLoading }) {
           connected={connected}
           headerAlert={headerAlert}
         />
-        <div id="faq" className="faq page-content">
+        <div className="partner page-content">
           <Head>
             <title>Dusty Vaults | Partners</title>
             <meta name="description" content="Frequently answered questions" />
@@ -113,7 +114,98 @@ export default function Partners({ headerAlert, closeAlert, closeLoading }) {
           </Head>
           <Container>
             <div className="section-title" style={{ paddingTop: !headerAlert ? 35 : 60 }}>
-              <h1 style={{ textTransform: "capitalize" }}>Our Partners</h1>
+              <h1 style={{ textTransform: "capitalize" }}>Partners</h1>
+              <p>The following companies / projects have partnered with us to allow their customers to generate yield through DustyVaults with their NFT&apos;s. Please do check them out!</p>
+            </div>
+            <div className="landing-content">
+              <div className="item-card">
+                {/* eslint-disable-next-line */}
+                <img
+                  src="./partners/1.jpg"
+                  alt=""
+                />
+                <p>SATOSHI SPuD is the common man&apos;s NFT. They are releasing this collection to show everybody that they can do it too.&nbsp;
+                  <a
+                    href="https://twitter.com/Potato_BC"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    @Potato_BC
+                  </a>
+                </p>
+                <div className="item-hover">
+                  <a
+                    href="https://instagram.com/satoshi_spud"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <ReactSVG src="./icons/instagram.svg" width={30} height={30} />
+                  </a>
+                  <a
+                    href="http://vt.tiktok.com/ZSe4DbHTL/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <ReactSVG src="./icons/tiktok.svg" width={30} height={30} />
+                  </a>
+                </div>
+              </div>
+              <div className="item-card">
+                {/* eslint-disable-next-line */}
+                <img
+                  src="./partners/4.jpg"
+                  alt=""
+                />
+                <p>BoujeeBoys is an upcoming collection of 6,666 with merchandise, metaverse integration and a lot of giveaways.</p>
+                <div className="item-hover">
+                  <a
+                    href="https://instagram.com/boujeeboys_nft"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <ReactSVG src="./icons/instagram.svg" width={30} height={30} />
+                  </a>
+                </div>
+              </div>
+              <div className="item-card">
+                {/* eslint-disable-next-line */}
+                <img
+                  src="./partners/6.jpg"
+                  alt=""
+                />
+                <p>Ship With Wolves is a wonderful collection of wolves living on the ethereum blockchain created by 2 brothers&nbsp;
+                  <a
+                    href="https://twitter.com/shipwithwolves"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    @shipwithwolves
+                  </a>
+                </p>
+                <div className="item-hover">
+                  <a
+                    href="https://opensea.io/collection/ship-with-wolves"
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{ background: "transparent" }}
+                  >
+                    <ReactSVG src="./icons/opeansea.svg" width={30} height={30} />
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div className="come-soon">
+              <span></span>
+              <p>More coming soon...</p>
+              <h5>Want to partner?
+                <a
+                  href="https://form.jotform.com/220128465418050"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Click here!
+                </a>
+              </h5>
             </div>
           </Container>
         </div>

@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react"
 import NFTCard from "./NFTCard"
 import ItemFilter from "./ItemFilter"
-import MoreVertIcon from "@mui/icons-material/MoreVert"
 import { ButtonGroup } from "@mui/material"
-import ClickAwayListener from "@mui/material/ClickAwayListener"
-import { DoActionButton, MoreMenuButton, CancelButton, OptionButton, UnstakeButton, MultiStakeButton, MultiUnstakeButton } from "./styleHook"
+import { DoActionButton, CancelButton, OptionButton, UnstakeButton, MultiStakeButton, MultiUnstakeButton } from "./styleHook"
 import MultiStakeModal from "./MultiStakeModal"
 import { errorAlert, successAlert, warningAlert } from "./toastGroup"
 import Web3Modal from "web3modal"
@@ -37,7 +35,6 @@ export default function NFTMap({
   const [pageRerender, setPageRerender] = useState("")
   const [unstaked, setUnstaked] = useState(0)
   const [staked, setStaked] = useState(0)
-  const [more, setMore] = useState(false)
   const [multiStakeAble, setMultiStakeAble] = useState(false)
   const [multiUnstakeAble, setMultiUnstakeAble] = useState(false)
   const [selectCount, setSelectCount] = useState(0)
@@ -110,7 +107,6 @@ export default function NFTMap({
     setSelectCount(0)
     deselectAll()
     setCheckAble(true)
-    setMore(false)
   }
 
   const selectAll = () => {

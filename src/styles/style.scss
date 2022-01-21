@@ -831,7 +831,7 @@ p.signer-balance {
     margin-top: 40px;
   }
 }
-.faq-content {
+.landing-content {
   max-width: 680px;
   margin: 0 auto;
   position: relative;
@@ -891,6 +891,10 @@ p.signer-balance {
   p {
     color: #fff;
     line-height: 1.5;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px;
   }
   a {
     color: #40b3e0;
@@ -1207,6 +1211,69 @@ p.signer-balance {
   align-items: center;
   padding: 20px 0;
 }
+.partner {
+  padding-top: 80px;
+  padding-bottom: 80px;
+  position: relative;
+  width: 100%;
+}
+.landing-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.item-card {
+  width: calc(33.33% - 20px);
+  margin: 10px;
+  padding: 10px 10px 20px;
+  border: 1px solid #ffffff1a;
+  border-radius: 12px;
+  img {
+    width: 100%;
+    object-fit: contain;
+    border-radius: 6px;
+  }
+  p {
+    font-size: 12px;
+    margin-top: 10px;
+    color: #fff;
+  }
+  a {
+    color: $primary-color;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  .item-hover {
+    a {
+      margin: 0 10px;
+      svg {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+}
+.item-hover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  a {
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
 @media (max-width: 1200px) {
   .nft-card {
     width: calc(33% - 20px);
@@ -1247,6 +1314,9 @@ p.signer-balance {
 @media (max-width: 768px) {
   .sub-controller {
     flex-direction: column;
+  }
+  .item-card {
+    width: calc(50% - 10px);
   }
   .empty-text p {
     font-size: 14px;
@@ -1328,8 +1398,49 @@ p.signer-balance {
     margin-left: 5px;
   }
 }
-
+.come-soon {
+  text-align: center;
+  color: #fff;
+  margin-top: 20px;
+  position: relative;
+  span {
+    height: 1px;
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-top: 1px solid #ffffff2e;
+    border-style: dashed;
+    border-bottom: none;
+    width: 100%;
+    max-width: 620px;
+    border-right: none;
+    border-left: none;
+  }
+  p {
+    font-size: 24px;
+    padding-top: 10px;
+    color: #ffffff73;
+  }
+  h5 {
+    margin-top: 5px;
+    font-weight: 500;
+    font-size: 14px;
+    a {
+      margin-left: 5px;
+      color: $primary-color;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
 @media (max-width: 576px) {
+  .item-card {
+    width: 250px;
+    margin-left: 0;
+    margin-right: 0;
+  }
   .guide-hero {
     flex-direction: column;
   }
